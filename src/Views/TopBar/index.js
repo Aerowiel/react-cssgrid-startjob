@@ -11,9 +11,12 @@ class TopBar extends Component {
             <a className="title">Bienvenue sur StartJob</a>
             <div className="topListButton">
                 <div className="wrapperTopListButton">
-                    <button> Super</button>
-                    <button> Super2</button>
-                    <button><i className="fas fa-user-tie"></i></button>
+                    <div className="containerWrapperTopList">
+                        <div> Super</div>
+                        <div> Super2</div>
+                        <div><Link to="/userProfile"><i className="fas fa-user-tie"></i></Link></div>
+                    </div>
+                    
                 </div>
             </div>
         </div>

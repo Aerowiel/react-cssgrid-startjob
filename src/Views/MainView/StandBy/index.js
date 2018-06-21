@@ -4,7 +4,7 @@ class StandBy extends Component {
   render() {
     return (
       <div>
-        Bienvenue sur la page de contact !
+        Bienvenue sur la page de standby !
       </div>
     );
   }

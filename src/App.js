@@ -22,6 +22,7 @@ import InterestedByYou from './Views/MainView/InterestedByYou';
 import Dashboard from './Views/MainView/Dashboard';
 import TopBar from './Views/TopBar';
 import FootBar from './Views/FootBar';
+import CreateOffer from './Views/MainView/CreateOffer';
 
 console.log(Dashboard)
 class App extends Component {
@@ -32,11 +33,12 @@ class App extends Component {
           <Menu/>
           <div className="mainView">
             <Switch>
-                  <Route path="/" component={Dashboard} />
+                  <Route exact={true} path="/" component={Dashboard} />
                   <Route path="/userProfile" component={UserProfile} />
                   <Route path="/visiteOnYourProfile" component={VisiteOnYourProfile} />
-                  <Route path ="/stanBy" component={StandBy} />
+                  <Route path ="/standBy" component={StandBy} />
                   <Route path="/interestedByYou" component={InterestedByYou} />
+                  <Route path="/createOffer" component={CreateOffer}/>
             </Switch>
           </div>
           <FootBar/>

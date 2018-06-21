@@ -84,10 +84,10 @@ html{
 .footBar{
   box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-  background-color: #0099ff;
+  background-color: white;
   grid-column: 1 /13;
   grid-row: 12 / 13;
-  color: white;
+  color: #0099ff;
   font-size: 1.2em;
  
 }
@@ -120,19 +120,26 @@ html{
 
 .wrapperTopListButton{
   height: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(1, 1fr); 
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr); 
+
 }
+.containerWrapperTopList{
+  grid-column: 1 / 4;
+  grid-row: 1;
+}
+
 
 .wrapperTopBar{
   height: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(4, 1fr);
+
 }
 
-.wrapperTopListButton button i{
+.wrapperTopListButton button{
+
 }
 
 .wrapperTopListButton button{
@@ -187,10 +194,318 @@ html{
   margin-top: 1.5%;
 }
 
-.buttonSideBar{
-  width: 50px;
-  height: 50px;
+.imgSideBar{
+  width: 40px;
+  height: 40px;
   float: left;
   margin-right: 5%;
   margin : 10px 10px 10px 10px;
+}
+
+.buttonSlider{
+  width: 100%;
+  height: 100%;
+}
+.buttonSlider:focus {
+  background-color: #0099ff;
+  img svg{
+    fill: #0099ff;
+  }
+}
+
+.visitContainer{
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-color: #0099ff;
+  color: white;
+}
+
+.parentVisitContainer {
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 20px;
+  width: 100%;
+  a{
+    font-size: 14px;
+  }
+  
+}
+.parentVisitContainer:hover{
+  border: 2px solid #03DAC6;
+  .visitContainer{
+    background-color: #03DAC6;
+  }
+}
+
+.visitEnterprise{
+  margin-left: 1%;
+}
+
+.visitLocalisation{
+  margin-left: 60%;
+}
+
+.visitCollaborateur{
+  float: right;
+}
+
+.containerCard{
+  width: 100%;
+  height: 100%;
+  grid-column: 1 / -1;
+  grid-row : 2 / -1;
+}
+
+.wrapperCard{
+  border-radius:2%;
+  background-color: white;
+  border: thin solid #03DAC6;
+  display: inline-block;
+  position: relative;
+}
+
+.wrapperCard:hover{
+    background-color: #03DAC6;
+    // z-index: 12;
+    // width:375px;
+    // height: 520px;
+    // top: 30px;
+}
+.customColor{
+  border: thin solid #0099ff;
+}
+.customColor:hover{
+    background-color: #0099ff
+  
+}
+
+.cardHeader{
+  height: 35% !important;
+  width: 100% !important;
+  border-bottom: thin solid #03DAC6;
+}
+
+.customHeader{
+  border-bottom: thin solid #0099ff;
+
+}
+
+.cardHeader img {
+  width: 30% !important;
+  height: 50% !important;
+  margin-left: 35% !important;
+  margin-top: 10px !important;
+}
+
+.cardNames {
+  display: inline-block;
+  margin-top: 10%;
+  margin-left: 38% !important;
+  :nth-child(2){
+    margin-left: 5% !important;
+  }
+}
+
+.cardNames a{
+  
+    width: 100% !important;
+}
+
+.cardEmploy{
+  margin-left: 32% !important;
+
+}
+
+.cardEmploy a{
+  display: inline-block;
+  width: 100% !important;
+  color : lightgrey;
+  
+}
+
+.startStatsImage{
+  
+}
+
+
+
+.startStats{
+  margin-right: 30px;
+  float: left;
+  
+}
+.bulleNumberStats{
+  width: 50px;
+  height: 50px;
+  background-color:#03DAC6;
+  border: thin solid #0099ff;
+  float: left;
+  color: white;
+  border-radius: 50%;
+}
+
+.bulleNumberStats div{
+  width: 100%;
+  height: 100%;
+  font-size: 1.7em;
+  margin-left: 20%;
+  margin-top:20%;
+  font-weight: bold;
+
+}
+
+.cardContent{
+  width: 100%;
+}
+
+.cardContent button{
+  width: 80px  !important;
+  height: 30px  !important;
+}
+
+.gridViewWrapper{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr); 
+  height: 100%;
+  width: 100%;
+}
+
+
+.titleStartStats{
+  color: #0099ff;
+  font-size: 1.5em;
+  margin-left:2%;
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+
+.containerStatsInfo{
+  grid-column: 1 /3;
+  grid-row: 3 / -1 ;
+}
+
+.wrapperGridCard{
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(10, 1fr); 
+  width: inherit !important;
+  height: inherit !important;
+}
+.wrapperStatsInfo{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  width: 100%;
+  height: 100%;
+}
+
+.containerWrapper{
+  width: 100% !important;
+  height: 100% !important;
+  grid-column: 1 / 21;
+  grid-row: 1 / 111; 
+  position: relative !important;
+}
+.cardGridHandler{
+  display: grid;
+  position: absolute;
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows:  repeat(1, 1fr);
+  height: 100%;
+  width:100%;
+  :nth-child(1){
+    grid-column: 4 / 8;
+    grid-row : 1;
+    position: relative;
+    z-index : 15;
+  }
+  :nth-child(2){
+    grid-column: 4 / 9;
+    grid-row: 1;
+    z-index : 14;
+  }
+  :nth-child(3){
+    grid-column: 5 / 10;
+    grid-row: 1;
+    z-index : 13;
+  }
+  :nth-child(4){
+    grid-column: 6 / 11;
+    grid-row: 1;
+    z-index : 12;
+  }
+  :nth-child(5){
+    grid-column: 7 / 12;
+    grid-row: 1;
+    z-index : 11;
+  }
+  :nth-child(6){
+    grid-column: 8 / 13;
+    grid-row: 1;
+    z-index : 10;
+  }
+  :nth-child(7){
+    grid-column: 9 / 14;
+    grid-row: 1;
+    z-index : 9;
+  }
+  :nth-child(8){
+    grid-column: 10 / 15;
+    grid-row: 1;
+    z-index : 8;
+  }
+  :nth-child(9){
+    grid-column: 9 / 14;
+    grid-row: 1;
+    z-index : 7;
+  }
+  :nth-child(10){
+    grid-column: 10 / 15;
+    grid-row: 1;
+    z-index : 6;
+  }
+
+}
+.wrapperGridInterest{
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+.wrapperCardInterest{
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  height: 100%;
+  width: 100%;
+}
+.containerCartInterest{
+  grid-column: 1 ;
+  grid-rows: 1;
+  
+}
+
+.wrapperCardInterest img{
+  width: 100%;
+  height: 100%;
+  grid-column: 4 / 7;
+  grid-row: 2 / 5
+}
+
+.containerWrapperInterest{
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.wrapperCardInterest a{
+  grid-column: 4 /7;
+  grid-row: 6;  
+}
+
+.wrapperCardInterest{
+  border: thin solid black;
 }
