@@ -13,9 +13,6 @@ class Dashboard extends Component {
     
   }
 
-  changeColor(){
-    this.parentNode.removeChild(this);
-  }
   
   render() {
 
@@ -71,7 +68,8 @@ class Dashboard extends Component {
 
     var that = this;
     function destroyCard(e){
-      e.target.parentNode.parentNode.remove();
+      e.target.parentNode.classList.add('cardDeleteAnimation');
+      //e.target.parentNode.parentNode.remove();
     }
     
 

@@ -12,7 +12,7 @@ html{
 }
 .sideBar{
   grid-column: 1 / 3;
-  grid-row: 3 / 12;
+  grid-row: 3 / 18;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-bottom:4%;
@@ -59,7 +59,7 @@ html{
   height: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-rows: repeat(20, 1fr);
 }
 
 .sideBar ul{
@@ -75,7 +75,7 @@ html{
 
 .mainView{
   grid-column: 3/ 13;
-  grid-row : 3/ 12;
+  grid-row : 3/ 18;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-left:1%;
   margin-bottom:1%;
@@ -86,7 +86,7 @@ html{
 
   background-color: white;
   grid-column: 1 /13;
-  grid-row: 12 / 13;
+  grid-row: 18 / 20;
   color: #0099ff;
   font-size: 1.2em;
  
@@ -508,4 +508,45 @@ html{
 
 .wrapperCardInterest{
   border: thin solid black;
+}
+
+
+.customInterest0{
+  background-color: #0099ff;
+  color: white;
+}
+.customInterest1{
+  background-color: white;
+  color: black;
+}
+.customInterest2{
+  background-color: #d95165;
+  color: white;
+}
+
+.wrapperCardInterest:hover{
+  background-color: #03DAC6;
+}
+
+.OneCard{
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+}
+
+.cardSelected{
+  width: 100%;
+  height: 100%;
+
+}
+
+.cardDeleteAnimation{
+  animation-name : delete;
+  animation-duration: .5s;
+}
+
+@keyframes delete {
+  from {}
+  to {display : none;}
 }
