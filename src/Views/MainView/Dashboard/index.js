@@ -68,8 +68,8 @@ class Dashboard extends Component {
 
     var that = this;
     function destroyCard(e){
-      e.target.parentNode.classList.add('cardDeleteAnimation');
-      //e.target.parentNode.parentNode.remove();
+      //e.target.parentNode.classList.add('cardDeleteAnimation');
+      e.target.parentNode.parentNode.remove();
     }
     
 
