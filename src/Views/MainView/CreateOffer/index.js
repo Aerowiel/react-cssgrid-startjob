@@ -4,11 +4,12 @@ class CreateOffer extends Component {
   render() {
     return (
       <div className="wrapperCreateOffer">
+       <label className="labelEnterpriseOffer">
+                 <a className="enterpriseOffer disabled"> Sogeti</a>
+        </label>
         <div className="containerCreateOffer">
           <form>
-            <label> Nom de l'entreprise disabled:
-                 <a className="enterpriseOffer disabled"> Sogeti</a>
-            </label>  
+             
             <select className="secteurOffer">
                 <option>Dev Web</option>
                 <option>Dev Mobile</option>
@@ -33,9 +34,9 @@ class CreateOffer extends Component {
             <table className="requiredSkillsOffer">
               <tbody>
                 <tr>
-                  <td>Firstname</td>
-                  <td>Lastname</td> 
-                  <td>Age</td>
+                  <td><input type="checkbox"/>Firstname</td>
+                  <td><input type="checkbox"/>Lastname</td> 
+                  <td><input type="checkbox"/>Age</td>
                 </tr>
                 </tbody>
             </table>
