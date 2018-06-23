@@ -92,6 +92,8 @@ html{
  
 }
 
+
+
 .title{
   grid-column: 1 / 5;
   grid-row : 2 / 4;
@@ -99,6 +101,7 @@ html{
   height: 100%;
   font-size:2em;
   margin-left: 2%;
+ // font-style: "policeTitle";
 }
 
 .conversation{
@@ -223,11 +226,14 @@ html{
 
 .parentVisitContainer {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 20px;
+  margin: 20px;
   width: 100%;
   a{
     font-size: 14px;
   }
+  border-radius: 10px;
+
+  //do grid
   
 }
 .parentVisitContainer:hover{
@@ -262,6 +268,8 @@ html{
   border: thin solid #03DAC6;
   display: inline-block;
   position: relative;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 15px 6px 15px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 .wrapperCard:hover{
@@ -406,7 +414,7 @@ html{
   width: 100% !important;
   height: 100% !important;
   grid-column: 1 / 21;
-  grid-row: 1 / 111; 
+  grid-row: 1 / 9; 
   position: relative !important;
 }
 .cardGridHandler{
@@ -475,6 +483,8 @@ html{
   width: 100%;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
 }
 .wrapperCardInterest{
   display: grid;
@@ -482,6 +492,8 @@ html{
   grid-template-rows: repeat(9, 1fr);
   height: 100%;
   width: 100%;
+  background-color: white;
+  border-radius: 10px;
 }
 .containerCartInterest{
   grid-column: 1 ;
@@ -507,7 +519,10 @@ html{
 }
 
 .wrapperCardInterest{
-  border: thin solid black;
+  //border: thin solid black;
+  box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  
 }
 
 
@@ -545,8 +560,29 @@ html{
   animation-name : delete;
   animation-duration: .5s;
 }
+.wrapperCreateOffer{
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  height: 100%;
+  width: 100%;
+}
 
-@keyframes delete {
-  from {}
-  to {display : none;}
+.containerCreateOffer{
+  display: grid;
+  grid-column: 2 / 9;
+  grid-row: 2 / 9;
+}
+
+.disabled{
+  color: lightgrey;
+}
+
+form{
+  display: grid;
+}
+
+.errorMessage{
+  font-size:0.7em;
+  color:red;
 }
