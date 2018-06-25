@@ -2,21 +2,33 @@ import React, { Component } from 'react';
 import {
   Link,
 } from 'react-router-dom';
+import { subscribeToTimer} from '../../socketClient/test';
+
+
 
 class TopBar extends Component {
+  constructor(){
+    super();
+    this.state = {
+      timestamp: 'no timestamp yet'
+    };
+    subscribeToTimer((err, timestamp) => this.setState({ 
+      timestamp 
+    }));
+    
+
+  }
   render() {
     return (
     <div className="topBar"> 
         <div className="wrapperTopBar">
-            <a className="title">Bienvenue sur StartJob</a>
+            <a className="title">StartJob
+            <img className="ynovIcon" src="/src/images/ynov-informatique.png"/></a>
+            <a className="timer">{this.state.timestamp}</a>
             <div className="topListButton">
                 <div className="wrapperTopListButton">
-                    <div className="containerWrapperTopList">
-                        <div> Super</div>
-                        <div> Super2</div>
-                        <div><Link to="/userProfile"><i className="fas fa-user-tie"></i></Link></div>
-                    </div>
-                    
+                        <button><img src="/src/images/user.png"/></button>
+                        <button><Link to="/userProfile"></Link><img src="/src/images/logout.png"/></button>                    
                 </div>
             </div>
         </div>

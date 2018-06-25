@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { getAllCards} from '../../../socketClient/test';
 
-var listUser=[{name:"Carte Principal",prenom:"Jesus", nom:"Christ", emploi:"Dieu à temps plein", src:"/src/images/user.png"},{name:"Carte Secondaire",prenom:"Pere", nom:"Noel", emploi:"Fdp à temps plein",src:"/src/images/user.png"},{name:"Carte 3",prenom:"Raoul", nom:"Iglesias", emploi:"Chanteur PT à temps plein",src:"/src/images/user.png"},{name:"Carte 4",prenom:"Pere Fouettar", nom:"Lucifer", emploi:"Dieu à temps plein",src:"/src/images/user.png"}, {name:"carte 5",prenom:"Mars", nom:"Hares", emploi:"Dieu à temps plein",src:"/src/images/user.png"}, {carte:"carte 6",prenom:"Zeus", nom:"Jupiter", emploi:"Dieu à temps plein",src:"/src/images/user.png"}, {carte: "carte 7",prenom:"Michael", nom:"Schumarer", emploi:"Dieu à temps plein",src:"/src/images/user.png"}, {nname:"carte 8",prenom:"Sadam", nom:"Hussen", emploi:"fdp à temps plein",src:"/src/images/user.png"}, {name:"carte 9",prenom:"Gandhi", nom:"Le grand fou", emploi:"Fummette à temps plein",src:"/src/images/user.png"}, {name:"carte 10",prenom:"Moundir", nom:"Koh Lanta", emploi:"fdp à temps plein",src:"/src/images/user.png"}];
+var listUser=[{name:"Carte Principal",username:"Jesus", name:"Christ", emploiNow:"Dieu à temps plein", src:"/src/images/user.png"},{name:"Carte Secondaire",username:"Pere", name:"Noel", emploiNow:"Fdp à temps plein",src:"/src/images/user.png"},{name:"Carte 3",username:"Raoul", name:"Iglesias", emploiNow:"Chanteur PT à temps plein",src:"/src/images/user.png"},{name:"Carte 4",username:"Pere Fouettar", name:"Lucifer", emploiNow:"Dieu à temps plein",src:"/src/images/user.png"}, {name:"carte 5",username:"Mars", name:"Hares", emploiNow:"Dieu à temps plein",src:"/src/images/user.png"}, {carte:"carte 6",username:"Zeus", name:"Jupiter", emploiNow:"Dieu à temps plein",src:"/src/images/user.png"}, {carte: "carte 7",username:"Michael", name:"Schumarer", emploiNow:"Dieu à temps plein",src:"/src/images/user.png"}, {nname:"carte 8",username:"Sadam", name:"Hussen", emploiNow:"fdp à temps plein",src:"/src/images/user.png"}, {name:"carte 9",username:"Gandhi", name:"Le grand fou", emploiNowNow:"Fummette à temps plein",src:"/src/images/user.png"}, {name:"carte 10",username:"Moundir", name:"Koh Lanta", emploiNowNow:"fdp à temps plein",src:"/src/images/user.png"}];
 
 
 class Dashboard extends Component {
@@ -8,15 +9,24 @@ class Dashboard extends Component {
     super()
 
     this.state ={
-        listUser
+        listUser : listUser
     }
+   
+
     
   }
+  componentDidMount(){
+    getAllCards((err, cards) => 
+      this.setState({ listUser : cards })
+    ); 
 
+
+  }
   
-  render() {
+  render(){
 
-    var documentListUser = listUser.map(function(element, i){
+    var documentListUser = this.state.listUser.map(function(element, i){
+      console.log(element);
       if(i%2){
         return(
             <div key= {i} className="wrapperCard customColor">
@@ -24,11 +34,11 @@ class Dashboard extends Component {
                     <img className="cardImage" src={element.src}>
                     </img>
                       <div className="cardNames">
-                        <a>{element.prenom}</a>
-                        <a>{element.nom}</a>
+                        <a>{element.username}</a>
+                        <a>{element.name}</a>
                       </div>
                       <div className="cardEmploy">
-                        <a>{element.emploi}</a>
+                        <a>{element.emploiNow}</a>
                       </div>
                 </div>
                 <div className="cardContent">
@@ -45,11 +55,11 @@ class Dashboard extends Component {
                     <img className="cardImage" src={element.src}>
                     </img>
                     <div className="cardNames">
-                        <a>{element.prenom}</a>
-                        <a>{element.nom}</a>
+                        <a>{element.username}</a>
+                        <a>{element.name}</a>
                     </div>
                     <div className="cardEmploy">
-                        <a>{element.emploi}</a>
+                        <a>{element.emploiNowNow}</a>
                       </div>
                 </div>
                 <div className="cardContent">
@@ -64,14 +74,13 @@ class Dashboard extends Component {
 
     const listJobStats = {startWin: 22, exchange: 30, meeting: 12};
     
-    console.log(this.state);
+    console.log(this.state.listUser);
 
     var that = this;
     function destroyCard(e){
       //e.target.parentNode.classList.add('cardDeleteAnimation');
       e.target.parentNode.parentNode.remove();
     }
-    
 
     return (
       
@@ -79,9 +88,12 @@ class Dashboard extends Component {
         <a className="titleStartStats"> Vos stats StartJob</a>
         <div className="containerStatsInfo">
         
-          <div className="startStats"><div className="bulleNumberStats"><div>{listJobStats.startWin}</div></div> <img className="startStatsImage" src="/src/images/network.png"></img></div>
-          <div className="startStats"><div className="bulleNumberStats"><div>{listJobStats.exchange}</div></div><img className="startStatsImage" src="/src/images/exchange-arrows.png"></img></div>
-          <div className="startStats"><div className="bulleNumberStats"><div>{listJobStats.meeting}</div></div><img className="startStatsImage" src="/src/images/meeting.png"></img></div>
+          <div className="startStats">{listJobStats.startWin}</div>
+          <img className="startStatsImage" src="/src/images/network.png"/>
+          <div className="startStats">{listJobStats.exchange}</div>
+          <img className="startStatsImage" src="/src/images/exchange-arrows.png"/>
+          <div className="startStats">{listJobStats.meeting}</div>
+          <img className="startStatsImage" src="/src/images/meeting.png"/>
         </div>
         
         <div className="containerCard">

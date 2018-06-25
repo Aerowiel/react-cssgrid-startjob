@@ -11,14 +11,15 @@ class FootBar extends Component {
             <a className="conversation">Vos conversations</a>
             <div className="footListButton">
                 <div className="wrapperfootListButton">
-                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i>conv1</i></div>
-                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i>conv2</i></div>
-                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i>conv3</i></div>
-                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i>conv4</i></div>
-                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i>conv5</i></div>
-                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i>conv6</i></div>
-                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i>conv7</i></div>
-                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i>conv8</i></div>
+                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i></i></div>
+                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i></i></div>
+                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i></i></div>
+                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i></i></div>
+                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i></i></div>
+                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i></i></div>
+                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i></i></div>
+                    <div className="buttonConv"><button id="imageConv"><img src="/src/images/user.png"/></button><i></i></div>
+                
                 </div>
 
             </div>

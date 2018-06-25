@@ -24,7 +24,7 @@ import TopBar from './Views/TopBar';
 import FootBar from './Views/FootBar';
 import CreateOffer from './Views/MainView/CreateOffer';
 
-console.log(Dashboard)
+
 class App extends Component {
   render() {
     return (
