@@ -2,21 +2,12 @@ import React, { Component } from 'react';
 import {
   Link,
 } from 'react-router-dom';
-import { subscribeToTimer} from '../../socketClient/test';
 
 
 
 class TopBar extends Component {
   constructor(){
     super();
-    this.state = {
-      timestamp: 'no timestamp yet'
-    };
-    subscribeToTimer((err, timestamp) => this.setState({ 
-      timestamp 
-    }));
-    
-
   }
   render() {
     return (
@@ -24,7 +15,6 @@ class TopBar extends Component {
         <div className="wrapperTopBar">
             <a className="title">StartJob
             <img className="ynovIcon" src="/src/images/ynov-informatique.png"/></a>
-            <a className="timer">{this.state.timestamp}</a>
             <div className="topListButton">
                 <div className="wrapperTopListButton">
                         <button><img src="/src/images/user.png"/></button>

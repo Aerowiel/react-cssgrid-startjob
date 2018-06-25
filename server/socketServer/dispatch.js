@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
     express = require('express');
-    connector = require('./../utils/collectionDriver');
     bcrypt = require('bcrypt');
     cloudinary = require('cloudinary');
+    connector = require('./../connectDB');
 
 
 const io = require('socket.io')();
@@ -10,12 +10,6 @@ var schemaUser = new mongoose.Schema({ username: 'string', name: 'string' , emai
     var modelUser = mongoose.model('User', schemaUser);
 
 io.on('connection', (client) => {
-  client.on('subscribeToTimer', (interval) => {
-    console.log('client is subscribing to timer with interval ', interval);
-    setInterval(() => {
-      client.emit('timer', new Date());
-    }, interval);
-  });
   client.on('getAllCards', (interval)=>{
     console.log("getallcards", interval);
     
@@ -33,9 +27,34 @@ io.on('connection', (client) => {
               client.emit('responseGetAllCards', allCards);
           }
       }
+    });
   });
+  client.on('tryLogin', (User)=>{
+    console.log("trylogin okokokokokkokok")
+    var userToFind = {email : User.email};
+    modelUser.findOne(userToFind, function(err, userConnected){
+      if(err){
+              throw err;
+      }
+      else{
+        console.log(userConnected);
+        if(userConnected != null){
+          if(userConnected.password == User.password){
+            console.log("true response", userConnected)
+            client.emit('responseTryLogin', true);
+          }
+          else{
+            console.log("false response", userConnected)
+            client.emit('responseTryLogin', false);
+          }
+        }
+        else{
+          client.emit('responseTryLogin', false);
+        }
+      }
+    });
   });
-});;
+});
 
 
 

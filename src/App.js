@@ -3,6 +3,7 @@ import {
   Switch,
   Route,
   Link,
+  Redirect
 } from 'react-router-dom';
 
 import { hot } from 'react-hot-loader';
@@ -23,17 +24,23 @@ import Dashboard from './Views/MainView/Dashboard';
 import TopBar from './Views/TopBar';
 import FootBar from './Views/FootBar';
 import CreateOffer from './Views/MainView/CreateOffer';
+import Login from './Views/Login';
+
+import localStorage from 'localStorage';
 
 
 class App extends Component {
+
   render() {
     return (
       <div className="wrapper">
+          
           <TopBar/>
           <Menu/>
           <div className="mainView">
             <Switch>
-                  <Route exact={true} path="/" component={Dashboard} />
+                  <Route exact={true} path="/" component={Login} />
+                  <Route path="/dashboard" component={Dashboard} />
                   <Route path="/userProfile" component={UserProfile} />
                   <Route path="/visiteOnYourProfile" component={VisiteOnYourProfile} />
                   <Route path ="/standBy" component={StandBy} />
