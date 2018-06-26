@@ -29,6 +29,12 @@ import Login from './Views/Login';
 import localStorage from 'localStorage';
 import Register from './Views/Register';
 
+const PrivateRoute = ({ authed, Component, ...rest }) => (Component) 
+  // <Route {...rest} render={(props) =>
+  //     authed
+  //         ? <Component {...props}/>
+  //         : <Login {...props} />
+  // } />)
 class App extends Component {
   constructor(){
     super();
@@ -36,25 +42,24 @@ class App extends Component {
       redirectToReferrer: false
     };
   }
-    
   
   render() {
-   
     return (
       <div className="wrapper">
         <TopBar/>
         <Menu/>
         <div className="mainView">
           <Switch>
-                <Route path="/dashboard" component={Dashboard} render={ ()=>( localStorage.getItem("currentUser") == true ? (<Redirect to="/dashboard"/>) : (<Redirect to="/"/>) )}/>
-                <Route exact={true} path="/" component={Login} />
-                <Route path="/register" component={Register}/>
-                <Route path="/userProfile" component={UserProfile} />
-                <Route path="/visiteOnYourProfile" component={VisiteOnYourProfile} />
-                <Route path ="/standBy" component={StandBy} />
-                <Route path="/interestedByYou" component={InterestedByYou} />
-                <Route path="/createOffer" component={CreateOffer}/>
-          </Switch>
+              <PrivateRoute authed={true} path="/dashboard" component={Dashboard}/>
+              <PrivateRoute authed={true} path="/interestedByYou" component={InterestedByYou}/>
+              <PrivateRoute authed={true} path="/Register" component={Register}/>
+              <PrivateRoute authed={true} path="/UserProfile" component={UserProfile}/>
+              <PrivateRoute authed={true} path="/VisiteOnYourProfile" component={VisiteOnYourProfile}/>
+              <PrivateRoute authed={true} path="/StandBy" component={StandBy}/>
+              <PrivateRoute authed={true} path="/CreateOffer" component={CreateOffer}/>
+              <PrivateRoute authed={true} path="/login" component={Login}/>
+              <PrivateRoute authed={true} exact path="/" component={Dashboard}/>
+           </Switch>
         </div>
         <FootBar/>
     </div>
