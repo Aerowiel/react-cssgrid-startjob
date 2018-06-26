@@ -29,12 +29,11 @@ import Login from './Views/Login';
 import localStorage from 'localStorage';
 import Register from './Views/Register';
 
-const PrivateRoute = ({ authed, Component, ...rest }) => (Component) 
-  // <Route {...rest} render={(props) =>
-  //     authed
-  //         ? <Component {...props}/>
-  //         : <Login {...props} />
-  // } />)
+const PrivateRoute = ({ authed ,comp, ...rest }) => 
+      authed
+          ? <Route component={comp} {...rest}/>
+          : <Login />
+          
 class App extends Component {
   constructor(){
     super();
@@ -50,15 +49,15 @@ class App extends Component {
         <Menu/>
         <div className="mainView">
           <Switch>
-              <PrivateRoute authed={true} path="/dashboard" component={Dashboard}/>
-              <PrivateRoute authed={true} path="/interestedByYou" component={InterestedByYou}/>
-              <PrivateRoute authed={true} path="/Register" component={Register}/>
-              <PrivateRoute authed={true} path="/UserProfile" component={UserProfile}/>
-              <PrivateRoute authed={true} path="/VisiteOnYourProfile" component={VisiteOnYourProfile}/>
-              <PrivateRoute authed={true} path="/StandBy" component={StandBy}/>
-              <PrivateRoute authed={true} path="/CreateOffer" component={CreateOffer}/>
-              <PrivateRoute authed={true} path="/login" component={Login}/>
-              <PrivateRoute authed={true} exact path="/" component={Dashboard}/>
+              <PrivateRoute authed={true} path="/dashboard" comp={Dashboard}/>
+              <PrivateRoute authed={true} path="/interestedByYou" comp={InterestedByYou}/>
+              <PrivateRoute authed={true} path="/Register" comp={Register}/>
+              <PrivateRoute authed={true} path="/UserProfile" comp={UserProfile}/>
+              <PrivateRoute authed={true} path="/VisiteOnYourProfile" comp={VisiteOnYourProfile}/>
+              <PrivateRoute authed={true} path="/StandBy" comp={StandBy}/>
+              <PrivateRoute authed={true} path="/CreateOffer" comp={CreateOffer}/>
+              <PrivateRoute authed={true} path="/login" comp={Login}/>
+              <PrivateRoute authed={true} exact path="/" comp={Dashboard}/>
            </Switch>
         </div>
         <FootBar/>
