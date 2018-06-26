@@ -25,7 +25,7 @@ class Login extends Component {
     setStorageUser(returnBool){
         
         localStorage.setItem("userConnect",returnBool);
-        console.log(localStorage.getItem("userConnect")); 
+        console.log("BOOOOOOOOOL",localStorage.getItem("userConnect")); 
     }
     setUserMail(e) {
             this.setState({userMail : e.target.value});
@@ -41,7 +41,7 @@ class Login extends Component {
                 <input className="inputLogin userMail" placeholder="Email" onChange={this.setUserMail.bind(this)}/>
                 <input className="inputLogin userPassword" placeholder="Mot de Passe" onChange={this.setUserPassword.bind(this)}/>
                 <a className="errorMessage">Erreur</a>
-                <Link to={localStorage.getItem("userConnect") == true ? "/dashboard" : "/"}><input type="submit" value="Se Connecter" onClick={this.submitConnect.bind(this)}></input></Link>
+                <Link to="/dashboard"><input type="submit" value="Se Connecter" onClick={this.submitConnect.bind(this)}></input></Link>
             </div>
         </div>
     );

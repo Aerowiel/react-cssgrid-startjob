@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Visits from '../../../Component/Visits';
 
 class VisiteOnYourProfile extends Component {
   render() {
@@ -7,20 +8,12 @@ class VisiteOnYourProfile extends Component {
     
     const documentVisit = listVisit.map(function(element, i){
       return(
-        <div key={i} className="parentVisitContainer">
-          <a>{element.date}</a>
-          <div className="visitContainer">
-            <img src=""></img>
-            <a className="visitEnterprise">{element.enterprise}</a>
-            <a className="visitLocalisation">{element.localisation}</a>
-            <a className="visitCollaborateur">{element.collaborateur}</a>
-          </div>
-        </div>
+        <Visits key= {i} date={element.date} enterprise={element.enterprise} collaborateur={element.collaborateur} localisation={element.localisation}/>
       );
     });
     
     return (
-      <div>
+      <div className="wrapperVisits">
         {documentVisit}
       </div>
     );
