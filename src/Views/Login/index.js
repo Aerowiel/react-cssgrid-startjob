@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import {
   Link,
   Route,
-  Redirect
+  Redirect,
+  withRouter
 } from 'react-router-dom';
 import TopBar from '../TopBar';
 import { tryLogin } from '../../socketClient/login';
 import localStorage from 'localStorage';
+
+import {userLogStatus} from '../../App';
+
 class Login extends Component {
     constructor(){
         super();
@@ -23,9 +27,14 @@ class Login extends Component {
         );      
     }
     setStorageUser(returnBool){
-        
-        localStorage.setItem("userConnect",returnBool);
-        console.log("BOOOOOOOOOL",localStorage.getItem("userConnect")); 
+        if(returnBool == true){
+            console.log(returnBool)
+            userLogStatus.isLog();
+        }
+        else{
+            userLogStatus.isLogOut();
+            ;
+        }
     }
     setUserMail(e) {
             this.setState({userMail : e.target.value});
@@ -41,7 +50,7 @@ class Login extends Component {
                 <input className="inputLogin userMail" placeholder="Email" onChange={this.setUserMail.bind(this)}/>
                 <input className="inputLogin userPassword" placeholder="Mot de Passe" onChange={this.setUserPassword.bind(this)}/>
                 <a className="errorMessage">Erreur</a>
-                <Link to="/dashboard"><input type="submit" value="Se Connecter" onClick={this.submitConnect.bind(this)}></input></Link>
+                <Link to="/"><input type="submit" value="Se Connecter" onClick={this.submitConnect.bind(this)}></input></Link>
             </div>
         </div>
     );

@@ -3,7 +3,8 @@ import {
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
+  BrowserRouter as Router
 } from 'react-router-dom';
 
 import { hot } from 'react-hot-loader';
@@ -29,43 +30,60 @@ import Login from './Views/Login';
 import localStorage from 'localStorage';
 import Register from './Views/Register';
 
-const PrivateRoute = ({ authed ,comp, ...rest }) => 
-      authed
+export const userLogStatus= {
+  isAuthenticate: false,
+  isLog(){
+    this.isAuthenticate = true;
+    console.log(this.isAuthenticate )
+    setTimeout(console.log("await fake azync"), 2000);
+  },
+  isLogOut(cb){
+    this.isAuthenticate = false;
+    setTimeout(console.log("await fake azyncs"), 2000);
+  }
+}
+
+const PrivateRoute = ({comp, ...rest }) => 
+  userLogStatus.isAuthenticate 
           ? <Route component={comp} {...rest}/>
-          : <Login />
-          
+          : <Redirect to="/login"/>
+
 class App extends Component {
   constructor(){
     super();
     this.state = {
       redirectToReferrer: false
-    };
+      };
   }
   
   render() {
+    console.log(userLogStatus.isAuthenticate);
     return (
-      <div className="wrapper">
-        <TopBar/>
-        <Menu/>
-        <div className="mainView">
-          <Switch>
-              <PrivateRoute authed={true} path="/dashboard" comp={Dashboard}/>
-              <PrivateRoute authed={true} path="/interestedByYou" comp={InterestedByYou}/>
-              <PrivateRoute authed={true} path="/Register" comp={Register}/>
-              <PrivateRoute authed={true} path="/UserProfile" comp={UserProfile}/>
-              <PrivateRoute authed={true} path="/VisiteOnYourProfile" comp={VisiteOnYourProfile}/>
-              <PrivateRoute authed={true} path="/StandBy" comp={StandBy}/>
-              <PrivateRoute authed={true} path="/CreateOffer" comp={CreateOffer}/>
-              <PrivateRoute authed={true} path="/login" comp={Login}/>
-              <PrivateRoute authed={true} exact path="/" comp={Dashboard}/>
-           </Switch>
-        </div>
-        <FootBar/>
-    </div>
+      <Router>
+        <Switch>
+          <Route render={() =>(
+            userLogStatus.isAuthenticate ?(
+              <div className="wrapper">
+                <TopBar/>
+                <Menu/>
+                <div className="mainView">
+                    <PrivateRoute path="/interestedByYou" comp={InterestedByYou}/>
+                    <PrivateRoute path="/userProfile" comp={UserProfile}/>
+                    <PrivateRoute path="/visiteOnYourProfile" comp={VisiteOnYourProfile}/>
+                    <PrivateRoute path="/standBy" comp={StandBy}/>
+                    <PrivateRoute path="/createOffer" comp={CreateOffer}/>
+                    <PrivateRoute exact path="/" comp={Dashboard}/>
+                </div>
+                <FootBar/>
+              </div>
+            ) :(
+              <Login/>
+            )
+          )}/>
+        </Switch>
+      </Router>
     );
   }
 }
-
-
 
 export default hot(module)(App);
