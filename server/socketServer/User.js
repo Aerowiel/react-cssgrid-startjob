@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 
 const io = require('socket.io')();
 var schemaUser = new mongoose.Schema({ username: 'string', name: 'string' , email: 'string', password:'string',emploiNow:'string',picture:'string', formation:'string', listLastEmploy:'array', description:'string', listCompetence:'array', listInterest: 'array'},{ collection : 'Users' });
-var modelUser = mongoose.model('User', schemaUser);
+global.modelUser = mongoose.model('User', schemaUser);
 
 io.on('connection', (client) => {
   client.on('tryLogin', (User)=>{

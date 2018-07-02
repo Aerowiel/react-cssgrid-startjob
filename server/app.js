@@ -5,7 +5,13 @@ var path = require('path');
 var bodyParser = require('body-parser');
 // var logger = require('morgan');
 var requireDir = require('require-dir');
-var socketServer = require('./socketServer/dispatch');
+var socketUser = require('./socketServer/User');
+var socketCards = require('./socketServer/Cards');
+var socketMessage = require('./socketServer/Message');
+var socketNotifications = require('./socketServer/Notifications');
+var socketVisits = require('./socketServer/Visits');
+
+
 
 var app = express();
 
