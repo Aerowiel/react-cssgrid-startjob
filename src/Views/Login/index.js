@@ -12,19 +12,22 @@ import localStorage from 'localStorage';
 import {userLogStatus} from '../../App';
 
 class Login extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             loginStatus: 'false',
             userMail: '',
             userPassword: ''
-        };             
+        };
     }
     submitConnect(){
+      // this.props.history.push("/")
+      const { history } = this.props; 
+      console.log(history);
         var User = {email : this.state.userMail, password: this.state.userPassword}
-        tryLogin(User,(err, returnUser) => 
+        tryLogin(User,(err, returnUser) =>
             this.setStorageUser(returnUser)
-        );      
+        );
     }
     setStorageUser(returnUser){
         if(returnUser){
@@ -41,7 +44,7 @@ class Login extends Component {
     setUserPassword(e){
         this.setState({userPassword : e.target.value});
     }
-    
+
   render() {
     return (
         <div className="loginContainer">

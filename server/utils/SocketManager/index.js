@@ -3,7 +3,7 @@
 class SocketManager {
 
     constructor() {
-        
+
     }
 
     connect(clientSocket) {
@@ -36,10 +36,8 @@ class SocketManager {
             else {
                 if (allCards == null) {
                     client.emit('responseGetAllCards', null);
-
                 }
                 else {
-                    console.log(allCards);
                     client.emit('responseGetAllCards', allCards);
                 }
             }
@@ -103,18 +101,19 @@ class SocketManager {
 
     tryLogin(user, client) {
         var userToFind = {email : user.email};
-        SchemaManager.modelUser.findOne(userToFind, function(err, userConnected){
+        SchemaManager.modelUser.findOne(userToFind, function(err, connectedUser){
             if(err){
                     throw err;
             }
             else{
-                console.log(userConnected);
-                if(userConnected != null){
-                    if(userConnected.password == user.password){
-                        client.emit('responseTryLogin', userConnected);
+                if(connectedUser != null){
+                    if(connectedUser.password == user.password){
+                        console.log('[SocketManager] function tryLogin()');
+                        UserManager.createUser(connectedUser._id, client.id, connectedUser.name, connectedUser.username, connectedUser.email, []);
+
+                        client.emit('responseTryLogin', connectedUser);
                     }
                     else{
-                        console.log("false response", userConnected)
                         client.emit('responseTryLogin', null);
                     }
                 }
@@ -166,7 +165,7 @@ class SocketManager {
                                     }
                                 });
                             }
-                            else {              
+                            else {
                                 client.emit("responseRegister", null);
                             }
                         }
@@ -297,7 +296,7 @@ class SocketManager {
 
 
 
-    // utils 
+    // utils
 
     addNotificationToThisUser(userTargeted, newNotification) {
         modelNotification.findOne({ userMail: userTargeted }, function (err, response) {
@@ -347,3 +346,5 @@ const instance = new SocketManager();
 module.exports = instance;
 
 const SchemaManager = require('../SchemaManager');
+
+const UserManager = require('../UserManager');
