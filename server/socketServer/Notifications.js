@@ -9,7 +9,7 @@ const io = require('socket.io')();
 
 
 io.on('connection', (client) => {
-    var schmeaNotification = new mongoose.Schema({userMail: 'string', listNotification : [{type:'string'},{date:'string'},{statusView:'boolean'},{message:'string'}]},{ collection : 'notificationSystem' });
+  var schmeaNotification = new mongoose.Schema({userMail: 'string', listNotification : [{type:'string'},{date:'string'},{statusView:'boolean'},{message:'string'}]},{ collection : 'notificationSystem' });
   var modelNotification = mongoose.model('notificationSystem', schmeaNotification);
 
   client.on('getNotification', (userMail)=>{

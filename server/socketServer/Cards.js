@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 const io = require('socket.io')();
 
 io.on('connection', (client) => {
+
+    console.log("cards.js");
     client.on('getAllCards', (interval)=>{    
         modelUser.find({}, function(err, allCards){
           if(err){

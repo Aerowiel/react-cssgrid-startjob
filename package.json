@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --env.config=dev --watch --progress --hot --inline --port 6600",
     "build": "webpack --mode production",
-    "start:dev": "webpack-dev-server --hot --mode development --open"
+    "start:dev": "webpack-dev-server --hot --mode development --open --port 7777"
   },
   "keywords": [],
   "author": "",
