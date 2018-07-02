@@ -45,7 +45,7 @@ class Dashboard extends Component {
       
       <div className="gridViewWrapper">
         <a className="titleStartStats"> Vos stats StartJob</a>
-        <div className="containerStatsInfo">
+        {/* <div className="containerStatsInfo">
         
           <div className="startStats">{listJobStats.startWin}</div>
           <img className="startStatsImage" src="/src/images/network.png"/>
@@ -53,7 +53,7 @@ class Dashboard extends Component {
           <img className="startStatsImage" src="/src/images/exchange-arrows.png"/>
           <div className="startStats">{listJobStats.meeting}</div>
           <img className="startStatsImage" src="/src/images/meeting.png"/>
-        </div>
+        </div> */}
         
         <div className="containerCard">
           <div className="wrapperGridCard">
