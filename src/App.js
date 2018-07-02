@@ -46,7 +46,7 @@ export const userLogStatus= {
 const PrivateRoute = ({comp, ...rest }) => 
   userLogStatus.isAuthenticate 
           ? <Route component={comp} {...rest}/>
-          : <Redirect to="/login"/>
+          : <Redirect to="/register"/>
 
 class App extends Component {
   constructor(){
