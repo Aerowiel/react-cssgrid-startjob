@@ -4,5 +4,5 @@ import {BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import './scss/main.scss';
 
-ReactDOM.render(<Router path="/"><App/></Router>,
+ReactDOM.render(<App/>,
     document.getElementById('root'));

@@ -24,7 +24,7 @@ class SocketManager {
 
         clientSocket.on('addInfoToProfil', (userMail, newInfos) => this.addInfosToProfil(userMail, newInfos, clientSocket));
 
-        clientSocket.on('getVisits', (email) => this.getVisits(email, clientSocket) );
+        clientSocket.on('getVisits', (email) => this.getVisits(email, clientSocket));
     }
 
     getAllCards(interval, client) {
@@ -102,33 +102,65 @@ class SocketManager {
     }
 
     tryLogin(user, client) {
-        var user = { name: User.name, username: User.username, dateOfBirth: User.dateOfBirth, email: User.email, password: User.password }
-        SchemaManager.modelUser.create(user, function (err, userCreated) {
-            if (err) {
-                throw err;
+        var userToFind = {email : user.email};
+        SchemaManager.modelUser.findOne(userToFind, function(err, userConnected){
+            if(err){
+                    throw err;
             }
-            else {
-                if (userCreated != null) {
-                    client.emit("responseRegister", userCreated);
+            else{
+                console.log(userConnected);
+                if(userConnected != null){
+                    if(userConnected.password == user.password){
+                        client.emit('responseTryLogin', userConnected);
+                    }
+                    else{
+                        console.log("false response", userConnected)
+                        client.emit('responseTryLogin', null);
+                    }
                 }
-                else {
-                    client.emit("responseRegister", null);
+                else{
+                    client.emit('responseTryLogin', null);
                 }
             }
         });
     }
 
     register(user, client) {
-        var user = { name: User.name, username: User.username, dateOfBirth: User.dateOfBirth, email: User.email, password: User.password }
+        console.log("register server side", user)
+        var user = { name: user.name, username: user.username, dateOfBirth: user.dateOfBirth, email: user.email, password: user.password, emploiNow: null,picture:null, formation: null, listLastEmploy: null, description: null, listCompetence: null, listInterest: null  }
         SchemaManager.modelUser.create(user, function (err, userCreated) {
             if (err) {
                 throw err;
             }
             else {
+                console.log("userCreated", userCreated);
                 if (userCreated != null) {
-                    client.emit("responseRegister", userCreated);
+                    var userVisists = { id: userCreated._id, userMail: userCreated.email, listUserVisit: [], listVisitedByUser: []};
+                    SchemaManager.modelVisits.create(userVisists, function(err, userVisitCreated){
+                        if(err){
+                            throw err;
+                        }
+                        else{
+                            console.log(userVisitCreated);
+                            var userNotification = {id: userCreated._id, userMail: userCreated.email, listNotification: []};
+                            SchemaManager.modelNotification.create(userNotification, function(err, userNotificationCreated){
+                                if(err){
+                                    throw err;
+                                }
+                                console.log(userNotificationCreated);
+                                var userMessage = {id: userCreated._id, userMail: userCreated.email, userInTalk: null, conversation: []};
+                                SchemaManager.modelMessage.create(userMessage, function(err, userMessageCreated){
+                                    if(err){
+                                        throw err;
+                                    }
+                                    console.log(userMessageCreated);
+                                    client.emit("responseRegister", userCreated);
+                                });
+                            });
+                        }
+                    });
                 }
-                else {
+                else {              
                     client.emit("responseRegister", null);
                 }
             }
@@ -238,7 +270,7 @@ class SocketManager {
     }
 
     getVisits(email, client) {
-        SchemaManager.modelVisits.findOne({ email: Email }, function (err, response) {
+        SchemaManager.modelVisits.findOne({ email: email }, function (err, response) {
             if (err) {
                 throw err;
             }
@@ -259,24 +291,24 @@ class SocketManager {
     // utils 
 
     addNotificationToThisUser(userTargeted, newNotification) {
-    modelNotification.findOne({ userMail: userTargeted }, function (err, response) {
-        if (err) {
-            throw err;
-        }
-        else {
-            var listNotificationToUpdate = [];
-            listNotificationToUpdate.push(response.listNotification);
-            listNotificationToUpdate.push(newNotification);
-            modelNotification.updateOne({ userMail: userTargeted }, $set[{ listNotification: listNotificationToUpdate }], function (err, result) {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    console.log(result);
-                }
-            })
-        }
-    });
+        modelNotification.findOne({ userMail: userTargeted }, function (err, response) {
+            if (err) {
+                throw err;
+            }
+            else {
+                var listNotificationToUpdate = [];
+                listNotificationToUpdate.push(response.listNotification);
+                listNotificationToUpdate.push(newNotification);
+                modelNotification.updateOne({ userMail: userTargeted }, $set[{ listNotification: listNotificationToUpdate }], function (err, result) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        console.log(result);
+                    }
+                })
+            }
+        });
     }
 
     checkIfAlreadyKnown(userMail, userChecked) {

@@ -22,18 +22,17 @@ class Login extends Component {
     }
     submitConnect(){
         var User = {email : this.state.userMail, password: this.state.userPassword}
-        tryLogin(User,(err, returnBool) => 
-            this.setStorageUser(returnBool)
+        tryLogin(User,(err, returnUser) => 
+            this.setStorageUser(returnUser)
         );      
     }
-    setStorageUser(returnBool){
-        if(returnBool == true){
-            console.log(returnBool)
+    setStorageUser(returnUser){
+        if(returnUser){
+            console.log(returnUser)
             userLogStatus.isLog();
         }
         else{
             userLogStatus.isLogOut();
-            ;
         }
     }
     setUserMail(e) {

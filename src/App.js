@@ -31,7 +31,7 @@ import localStorage from 'localStorage';
 import Register from './Views/Register';
 
 export const userLogStatus= {
-  isAuthenticate: true,
+  isAuthenticate: false,
   isLog(){
     this.isAuthenticate = true;
     console.log(this.isAuthenticate )
