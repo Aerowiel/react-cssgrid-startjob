@@ -11,29 +11,34 @@ import localStorage from 'localStorage';
 
 import {userLogStatus} from '../../App';
 
+import {history} from './../../history';
 class Login extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             loginStatus: 'false',
             userMail: '',
             userPassword: ''
-        };             
+        };
     }
     submitConnect(){
+      // this.props.history.push("/")
+      const { history } = this.props; 
+      console.log(history);
         var User = {email : this.state.userMail, password: this.state.userPassword}
-        tryLogin(User,(err, returnBool) => 
-            this.setStorageUser(returnBool)
-        );      
+        tryLogin(User,(err, returnUser) =>
+            this.setStorageUser(returnUser)
+        );
     }
-    setStorageUser(returnBool){
-        if(returnBool == true){
-            console.log(returnBool)
+    setStorageUser(returnUser){
+        console.log(returnUser);
+        if(returnUser){
+            console.log(returnUser)
             userLogStatus.isLog();
+            history.push("/");
         }
         else{
             userLogStatus.isLogOut();
-            ;
         }
     }
     setUserMail(e) {
@@ -42,7 +47,7 @@ class Login extends Component {
     setUserPassword(e){
         this.setState({userPassword : e.target.value});
     }
-    
+
   render() {
     return (
         <div className="loginContainer">
@@ -50,7 +55,7 @@ class Login extends Component {
                 <input className="inputLogin userMail" placeholder="Email" onChange={this.setUserMail.bind(this)}/>
                 <input className="inputLogin userPassword" placeholder="Mot de Passe" onChange={this.setUserPassword.bind(this)}/>
                 <a className="errorMessage">Erreur</a>
-                <Link to="/"><input type="submit" value="Se Connecter" onClick={this.submitConnect.bind(this)}></input></Link>
+                <input type="submit" value="Se Connecter" onClick={this.submitConnect.bind(this)}></input>
             </div>
         </div>
     );

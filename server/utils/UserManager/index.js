@@ -1,43 +1,46 @@
-class UsersHandler{
-  construct(){
+class UserManager{
+  constructor(){
+    console.log('constructor triggered');
     this.users = [];
   }
 
-   createUser(id, name, lastname, email, contacts){
-    var user = new User(id, name, lastname, email, contacts);
+  createUser(id, socketid, name, lastname, email, contacts){
+    var user = new User(id, socketid, name, lastname, email, contacts);
+    console.log(name);
     this.users.push(user);
+    console.log(this.users);
   }
 
- removeUserByEmail(email){
+  removeUserByEmail(email){
     this.users.splice(this.users.indexOf(getUserByEmail(email)), 1);
   }
   // Custom getters
-   getUserByNameLastname(name, lastname){
+  getUserByNameLastname(name, lastname){
     return this.users.find( (name, lastname ) => {
       user.name = name;
       user.lastname = lastname;
     });
-  }
-   getUserBySocketID(socketid){
+}
+  getUserBySocketID(socketid){
     return this.users.find(user => user.socketid === socketid );
-  }
+}
 
-   getUserByID(id){
+  getUserByID(id){
     return this.users.find(user => user.id === id );
-  }
+}
 
-   getUserByEmail(email){
+  getUserByEmail(email){
     return this.users.find(user => user.email === email );
   }
 
-  // Update
-   UpdateUserSocketID(socketid){
+// Update
+  UpdateUserSocketID(socketid){
 
   }
 
 }
 
-const instance = new UsersHandler()
+const instance = new UserManager()
 module.exports = instance;
 
 const User = require('../User');

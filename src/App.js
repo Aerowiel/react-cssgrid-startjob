@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {
   Switch,
   Route,
+  Router,
   Link,
-  Redirect,
-  BrowserRouter as Router
+  Redirect
 } from 'react-router-dom';
 
 import { hot } from 'react-hot-loader';
@@ -27,6 +27,8 @@ import FootBar from './Views/FootBar';
 import CreateOffer from './Views/MainView/CreateOffer';
 import Login from './Views/Login';
 
+import {history} from './history';
+
 import localStorage from 'localStorage';
 import Register from './Views/Register';
 
@@ -36,6 +38,7 @@ export const userLogStatus= {
     this.isAuthenticate = true;
     console.log(this.isAuthenticate )
     setTimeout(console.log("await fake azync"), 2000);
+    history.push("/");
   },
   isLogOut(cb){
     this.isAuthenticate = false;
@@ -46,7 +49,7 @@ export const userLogStatus= {
 const PrivateRoute = ({comp, ...rest }) => 
   true 
           ? <Route component={comp} {...rest}/>
-          : <Redirect to="/login"/>
+          : <Redirect to="/register"/>
 
 class App extends Component {
   constructor(){
@@ -59,7 +62,7 @@ class App extends Component {
   render() {
     console.log(userLogStatus.isAuthenticate);
     return (
-      <Router>
+      <Router history={history}>
         <Switch>
           <Route render={() =>(
             true ?(
