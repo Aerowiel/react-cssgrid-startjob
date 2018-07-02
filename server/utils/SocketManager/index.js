@@ -34,12 +34,16 @@ class SocketManager {
                 throw err;
             }
             else {
-                if (allCards == null) {
-                    client.emit('responseGetAllCards', null);
-                }
-                else {
-                    client.emit('responseGetAllCards', allCards);
-                }
+                var arrayAllResponse = [];
+                allCards.forEach(function(element, index){
+                    if(index <10){
+                        var item = allCards[Math.floor(Math.random()*allCards.length)];
+                        arrayAllResponse.push(item);
+                        console.log(item);
+                    }                    
+                });
+                console.log(arrayAllResponse)
+                client.emit('responseGetAllCards', arrayAllResponse);
             }
         });
     }
