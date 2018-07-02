@@ -204,16 +204,29 @@ class SocketManager {
 
                 break;
             case newInfos.picture:
-                SchemaManager.modelUser.updateOne({ email: userMail }, $set[{ picture: newInfos.picture }], function (err, response) {
+                SchemaManager.modelUser.findOne({ email: userMail }, function (err, response) {
                     if (err) {
                         throw err;
                     }
                     else {
-                        if (response) {
-                            client.emit("reponseAddInfo", true);
-                        }
+                        cloudinary.v2.uploader.upload(newInfos.picture,{ public_id : response.public_id},
+                            function(error, result) {
+                                if(error){
+                                    console.log(error);
+                                }
+                                signature = result.signature;
+                                SchemaManager.modelUser.updateOne({ _id: response._id }, { $set: { picture: result.secure_url }},function(err, response){
+                                    if(err){
+                                        throw err;
+                                    }
+                                    else{
+                                        client.emit("responseAddInfosToProfil", response)
+                                    }
+                            });
+                        });
                     }
                 });
+                
                 break;
             case newInfos.formation:
                 SchemaManager.modelUser.updateOne({ email: userMail }, $set[{ emploiNow: newInfos.formation }], function (err, response) {
@@ -339,8 +352,11 @@ class SocketManager {
                     return false;
                 }
             }
-    });
-}
+        });
+    }
+
+   
+
 }
 
 const instance = new SocketManager();

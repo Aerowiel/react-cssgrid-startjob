@@ -11,6 +11,7 @@ import localStorage from 'localStorage';
 
 import {userLogStatus} from '../../App';
 
+import {history} from './../../history';
 class Login extends Component {
     constructor(){
         super();
@@ -27,9 +28,11 @@ class Login extends Component {
         );      
     }
     setStorageUser(returnUser){
+        console.log(returnUser);
         if(returnUser){
             console.log(returnUser)
             userLogStatus.isLog();
+            history.push("/");
         }
         else{
             userLogStatus.isLogOut();
@@ -49,7 +52,7 @@ class Login extends Component {
                 <input className="inputLogin userMail" placeholder="Email" onChange={this.setUserMail.bind(this)}/>
                 <input className="inputLogin userPassword" placeholder="Mot de Passe" onChange={this.setUserPassword.bind(this)}/>
                 <a className="errorMessage">Erreur</a>
-                <Link to="/"><input type="submit" value="Se Connecter" onClick={this.submitConnect.bind(this)}></input></Link>
+                <input type="submit" value="Se Connecter" onClick={this.submitConnect.bind(this)}></input>
             </div>
         </div>
     );
