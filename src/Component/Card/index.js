@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class Card extends Component {
 
     constructor(){
@@ -10,15 +11,18 @@ class Card extends Component {
         };
 
     }
+    destroyCard(e){
+        e.target.parentNode.parentNode.remove();
+    }
+      
     render(){
-        function destroyCard(e){
-            e.target.parentNode.parentNode.remove();
-        }
+
         return(
             <div key= {this.props.i} className={"wrapperCard "+ this.props.customColor}>
                   <div className="cardHeader customHeader">
-                      <img className="cardImage" src={this.props.src}>
-                      </img>
+                      <img className="cardImage" src={this.props.src}/>
+                      <img className="languageCard"/>
+
                         <div className="cardNames">
                           <a>{this.props.username}</a>
                           <a>{this.props.name}</a>
@@ -28,7 +32,7 @@ class Card extends Component {
                         </div>
                   </div>
                   <div className="cardContent">
-                    <button onClick={destroyCard.bind(this)}> Next
+                    <button onClick={this.destroyCard.bind(this)}> Next
                       </button>
                   </div>
             </div>

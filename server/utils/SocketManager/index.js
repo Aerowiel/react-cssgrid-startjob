@@ -1,11 +1,11 @@
 
 
 class SocketManager {
-
+    
     constructor() {
-
+        //Random populate DB
+       
     }
-
     connect(clientSocket) {
         console.log('[SocketManager] connect() function called')
         console.log('[SocketManager] a client connected, client\'s socket id = ' + clientSocket.id)
@@ -27,6 +27,7 @@ class SocketManager {
         clientSocket.on('getVisits', (email) => this.getVisits(email, clientSocket));
     }
 
+    
     getAllCards(interval, client) {
         console.log('[SocketManager] getAllCards function called')
         SchemaManager.modelUser.find({}, function (err, allCards) {
@@ -66,7 +67,7 @@ class SocketManager {
 
     getNotification(userMail, client) {
         var listNewNotification = [];
-        modelNotification.findOne({ userMail: userMail }, function (err, responseNotifications) {
+        SchemaManager.modelNotification.findOne({ userMail: userMail }, function (err, responseNotifications) {
             if (err) {
                 throw err;
             }
@@ -126,7 +127,23 @@ class SocketManager {
                 }
             }
         });
+
+        //Random Creating User
+        // for(var i=0; i <300; i++){
+        //     var nameRandom = randomName.last()
+        //     var firstName = randomName.first()
+        //     var user = { name: nameRandom, username: firstName,dateOfBirth: "", email: nameRandom+"."+firstName+"@gmail.com", password: nameRandom, emploiNow: null,picture:null, formation: null, listLastEmploy: null, description: null, listCompetence: null, listInterest: null  }
+        //     SchemaManager.modelUser.create(user, function(err, response){
+        //         if(err){
+        //             throw err;
+        //         }
+        //         else{
+        //             console.log(response);
+        //         }
+        //     });
+        // }
     }
+
 
     register(user, client) {
         console.log("register server side", user)

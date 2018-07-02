@@ -10,7 +10,8 @@ class Dashboard extends Component {
     super()
 
     this.state ={
-        listUser : listUser
+        listUser : listUser,
+        selectedMode: 'User'
     }
   }
   componentDidMount(){
@@ -18,9 +19,9 @@ class Dashboard extends Component {
       this.setState({ listUser : cards })
     ); 
   }
-  
+ 
   render(){
-
+    var that = this;
     var documentListUser = this.state.listUser.map(function(element, i){
       console.log(element);
       if(i < 9){

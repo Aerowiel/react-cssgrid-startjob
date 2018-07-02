@@ -22,8 +22,8 @@ class TopBar extends Component {
             <img className="ynovIcon" src="/src/images/ynov-informatique.png"/></a>
             <div className="topListButton">
                 <div className="wrapperTopListButton">
-                        <button><img src="/src/images/user.png"/></button>
-                        <button onClick={this.disconnectUser.bind(this)}><Link to="/userProfile"></Link><img src="/src/images/logout.png"/></button>                    
+                        <Link to="/userProfile"><button><img src="/src/images/user.png"/></button></Link>
+                        <button onClick={this.disconnectUser.bind(this)}><img src="/src/images/logout.png"/></button>                    
                 </div>
             </div>
         </div>

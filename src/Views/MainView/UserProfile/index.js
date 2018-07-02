@@ -7,6 +7,7 @@ class UserProfile extends Component {
 
     }
   }
+
   setNewInfos(newInfos){
     addInfosToProfil(newInfos,(err, responseInfo) => 
       console.log("infoModified")
