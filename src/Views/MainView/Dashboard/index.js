@@ -27,12 +27,12 @@ class Dashboard extends Component {
       if(i < 9){
         if(i%2){
           return(
-            <Card username={element.username} name={element.username} emploiNow={element.emploiNow} customColor={"customInterest0"} key={i} src="/src/images/user.png" />
+            <Card username={element.username} name={element.name} emploiNow={element.emploiNow} customColor={"customInterest0"} key={i} src="/src/images/user.png" />
           );
         }
         else{
           return(
-            <Card username={element.username} name={element.username} emploiNow={element.emploiNow} customColor={"customInterest2"} key={i} src="/src/images/user.png" />
+            <Card username={element.username} name={element.name} emploiNow={element.emploiNow} customColor={"customInterest2"} key={i} src="/src/images/user.png" />
           );
         }  
       }

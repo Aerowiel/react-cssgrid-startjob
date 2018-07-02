@@ -7,6 +7,7 @@ class SocketManager {
        
     }
     connect(clientSocket) {
+        
         console.log('[SocketManager] connect() function called')
         console.log('[SocketManager] a client connected, client\'s socket id = ' + clientSocket.id)
 
@@ -25,8 +26,37 @@ class SocketManager {
         clientSocket.on('addInfoToProfil', (userMail, newInfos) => this.addInfosToProfil(userMail, newInfos, clientSocket));
 
         clientSocket.on('getVisits', (email) => this.getVisits(email, clientSocket));
+
+        // this.populate();
     }
 
+    // populate(){
+    //     console.log("okokokok")
+    //     var listCompetence =["C", "C#","C++","AngularJS","Angular 2", "Angular 4", "Angular 5", "ReactJS", "Python", "git", "docker", "java", "j2ee", "kotlin","swift", "cordova", "html", "css", "js", "VueJs", "Ajax", "Jquery", "php"]
+
+    //     // Random Creating User
+    //     for(var i=0; i <100; i++){
+    //         console.log("super")
+    //         var nameRandom = randomName.last()
+    //         var firstName = randomName.first()
+    //         var populateComp = [];
+    //         for(var x=0; x <4; x++){
+    //              var item = listCompetence[Math.floor(Math.random()*listCompetence.length)];
+    //              console.log(item);
+    //              populateComp.push(item)
+    //         }
+    //         var user = { name: nameRandom, username: firstName,dateOfBirth: "", email: nameRandom+"."+firstName+"@gmail.com", password: nameRandom, emploiNow: null,picture:null, formation: null, listLastEmploy: null, description: null, listCompetence: populateComp, listInterest: null  }
+           
+    //         SchemaManager.modelUser.create(user, function(err, response){
+    //             if(err){
+    //                 throw err;
+    //             }
+    //             else{
+    //                 console.log(response);
+    //             }
+    //         });
+    //     }
+    // }
     
     getAllCards(interval, client) {
         console.log('[SocketManager] getAllCards function called')
@@ -128,20 +158,6 @@ class SocketManager {
             }
         });
 
-        //Random Creating User
-        // for(var i=0; i <300; i++){
-        //     var nameRandom = randomName.last()
-        //     var firstName = randomName.first()
-        //     var user = { name: nameRandom, username: firstName,dateOfBirth: "", email: nameRandom+"."+firstName+"@gmail.com", password: nameRandom, emploiNow: null,picture:null, formation: null, listLastEmploy: null, description: null, listCompetence: null, listInterest: null  }
-        //     SchemaManager.modelUser.create(user, function(err, response){
-        //         if(err){
-        //             throw err;
-        //         }
-        //         else{
-        //             console.log(response);
-        //         }
-        //     });
-        // }
     }
 
 
