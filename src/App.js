@@ -65,7 +65,7 @@ class App extends Component {
       <Router history={history}>
         <Switch>
           <Route render={() =>(
-            true ?(
+            userLogStatus.isAuthenticate ?(
               <div className="wrapper">
                 <TopBar/>
                 <Menu/>
