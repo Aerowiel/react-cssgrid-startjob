@@ -128,40 +128,49 @@ class SocketManager {
     register(user, client) {
         console.log("register server side", user)
         var user = { name: user.name, username: user.username, dateOfBirth: user.dateOfBirth, email: user.email, password: user.password, emploiNow: null,picture:null, formation: null, listLastEmploy: null, description: null, listCompetence: null, listInterest: null  }
-        SchemaManager.modelUser.create(user, function (err, userCreated) {
-            if (err) {
+        SchemaManager.modelUser.findOne({mail : user.email}, function(err, response){
+            if(err){
                 throw err;
             }
-            else {
-                console.log("userCreated", userCreated);
-                if (userCreated != null) {
-                    var userVisists = { id: userCreated._id, userMail: userCreated.email, listUserVisit: [], listVisitedByUser: []};
-                    SchemaManager.modelVisits.create(userVisists, function(err, userVisitCreated){
-                        if(err){
+            else{
+                if(response == null){
+                    SchemaManager.modelUser.create(user, function (err, userCreated) {
+                        if (err) {
                             throw err;
                         }
-                        else{
-                            console.log(userVisitCreated);
-                            var userNotification = {id: userCreated._id, userMail: userCreated.email, listNotification: []};
-                            SchemaManager.modelNotification.create(userNotification, function(err, userNotificationCreated){
-                                if(err){
-                                    throw err;
-                                }
-                                console.log(userNotificationCreated);
-                                var userMessage = {id: userCreated._id, userMail: userCreated.email, userInTalk: null, conversation: []};
-                                SchemaManager.modelMessage.create(userMessage, function(err, userMessageCreated){
+                        else {
+                            console.log("userCreated", userCreated);
+                            if (userCreated != null) {
+                                var userVisists = { id: userCreated._id, userMail: userCreated.email, listUserVisit: [], listVisitedByUser: []};
+                                SchemaManager.modelVisits.create(userVisists, function(err, userVisitCreated){
                                     if(err){
                                         throw err;
                                     }
-                                    console.log(userMessageCreated);
-                                    client.emit("responseRegister", userCreated);
+                                    else{
+                                        console.log(userVisitCreated);
+                                        var userNotification = {id: userCreated._id, userMail: userCreated.email, listNotification: []};
+                                        SchemaManager.modelNotification.create(userNotification, function(err, userNotificationCreated){
+                                            if(err){
+                                                throw err;
+                                            }
+                                            console.log(userNotificationCreated);
+                                            var userMessage = {id: userCreated._id, userMail: userCreated.email, userInTalk: null, conversation: []};
+                                            SchemaManager.modelMessage.create(userMessage, function(err, userMessageCreated){
+                                                if(err){
+                                                    throw err;
+                                                }
+                                                console.log(userMessageCreated);
+                                                client.emit("responseRegister", userCreated);
+                                            });
+                                        });
+                                    }
                                 });
-                            });
+                            }
+                            else {              
+                                client.emit("responseRegister", null);
+                            }
                         }
                     });
-                }
-                else {              
-                    client.emit("responseRegister", null);
                 }
             }
         });
