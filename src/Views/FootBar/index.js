@@ -9,6 +9,7 @@ import {getFriends} from './../../socketClient/friend';
 var fakeList = ["","",""]
 
 
+
 class FootBar extends Component {
     constructor(){
         super();
@@ -32,12 +33,20 @@ class FootBar extends Component {
             sleectedconvindex: index
         })
     }
+    closeConvoBox(e) {
+        e.preventDefault();
+        this.setState({
+            selectedConv: false,
+        })
+    }
     render() {
     const size = 200 + this.state.sleectedconvindex*50
     return (
-    <div className="footBar"> 
-        {this.state.selectedConv && 
+    <div className="footBar">
+        {this.state.selectedConv &&
             <ConvBox
+                closeConvoBox={this.closeConvoBox.bind(this)}
+                id={this.state.sleectedconvindex}
                 style={{
                     left: size
                 }}
@@ -50,11 +59,11 @@ class FootBar extends Component {
                     {this.state.listFriend.map((element, index) => {
                         return(
                             <div key={index}
-                                onClick={this.selectConv.bind(this,index)}
+                                onClick={this.selectConv.bind(this,element.id)}
                             >
                                 <ConvLittle
                                     ey={index}
-                                    className={element} 
+                                    className={element}
                                     //src={element.src}
                                 />
                             </div>
