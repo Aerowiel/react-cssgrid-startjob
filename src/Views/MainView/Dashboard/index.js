@@ -57,8 +57,8 @@ class Dashboard extends Component {
         return(
           <div key= {i} className="wrapperCard">
                 <div className="cardHeader customHeader">
+                    <button className="languageCard"><img src="/src/images/worldwide.png"/></button>
                     <img className="cardImage" src={element.picture}/>
-                    <img className="languageCard"/>
                       <div className="cardNames">
                         <a>{element.username}</a>
                         <a>{element.name}</a>
@@ -72,9 +72,19 @@ class Dashboard extends Component {
                       </div>
                 </div>
                 <div className="cardContent">
-                    
-                  <button onClick={that.destroyCard.bind(that)}> Next
-                    </button>
+                  <div className="listComp">
+                    {
+                      element.listCompetence.map(function(item, index){
+                          return(
+                            <div>
+                              {item}
+                            </div>
+                          )
+                      })
+                    }
+                  </div>
+                  <button>Message</button>
+                  <button onClick={that.destroyCard.bind(that)}>Next</button>
                 </div>
           </div>
         );

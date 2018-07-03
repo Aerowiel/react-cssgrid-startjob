@@ -312,20 +312,21 @@ html{
 }
 
 .cardHeader{
-  height: 35% !important;
+  height: 40% !important;
   width: 100% !important;
 }
 
-.cardHeader img {
+.cardImage{
   width: 30% !important;
   height: 50% !important;
   margin-left: 35% !important;
   margin-top: 10px !important;
+  border-radius: 20%;
 }
 
 .cardNames {
   display: inline-block;
-  margin-top: 10%;
+  margin-top: 2%;
   color: black;
   width: 100%;
   text-align: center;
@@ -333,6 +334,41 @@ html{
     margin-left: 5px !important;
   }
 }
+
+.listComp{
+  display: grid;
+  height: 20%;
+  margin: 10px;
+  grid-column: 0 !important;
+  grid-row: 0 !important;
+}
+.listComp div{
+  width: 100%;
+  height: 100%;
+
+
+}
+.cardEmail{
+  text-align: center;
+}
+
+.cardContent{
+  height: 60%;
+}
+
+.languageCard{
+  margin-left: 80%;
+  margin-top: 2%;
+  border-radius: 20%;
+  width: 45px;
+  height: 30px;
+}
+
+.languageCard img{
+  height: 100%;
+  width: 80%;
+}
+
 
 .cardNames a{
   
@@ -378,7 +414,6 @@ html{
 
 .cardContent{
   width: 100%;
-  display: flex;
 }
 
 .cardContent button{
