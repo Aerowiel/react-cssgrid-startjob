@@ -7,6 +7,7 @@ global.randomName = require('random-name');
 global.io = require('socket.io')();
 var SocketManager = require('../utils/SocketManager');
 var SchemaManager = require('../utils/SchemaManager');
+global.fs = require('fs');
 
 // Schemas
 
