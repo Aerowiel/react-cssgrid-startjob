@@ -11,7 +11,7 @@ class ConvBox extends Component{
     }
 
     componentWillMount() {
-        
+
         // this.props.id
     }
 
@@ -49,6 +49,8 @@ class ConvBox extends Component{
 
     sendMessage(e) {
         e.preventDefault();
+
+        socketClient.emit('messageTest', 'test message from ' + sessionStorage.getItem('socketidStartjob') + ' to ' + this.props.id )
         console.log(e.target.elements[0].value)
         this.setState({
             messages : [
@@ -61,7 +63,7 @@ class ConvBox extends Component{
 
     render(){
         return(
-            <div 
+            <div
                 className="convoBox"
                 style={this.props.style}
             >

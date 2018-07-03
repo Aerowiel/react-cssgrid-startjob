@@ -28,7 +28,13 @@ class SocketManager {
         clientSocket.on('getVisits', (email) => this.getVisits(email, clientSocket));
 
         clientSocket.on('getFriend', (email) => this.getFriends(email, clientSocket));
+
+        clientSocket.on('messageTest', (message) => this.testMessage(message, clientSocket));
         // this.populate();
+      }
+
+    testMessage(message, client){
+      console.log(message);
     }
 
     // populate(){
