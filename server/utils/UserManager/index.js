@@ -24,7 +24,6 @@ class UserManager{
     });
 }
   getUserBySocketID(socketid){
-    console.log(this.users);
     return this.users.find(user => user.socketid === socketid );
 }
 
@@ -37,12 +36,17 @@ class UserManager{
   }
 
 // Update
-  updateUserSocketID(socketid){
-
+  updateUserSocketID(user, newSocketID){
+    user.socketid = newSocketID;
+    this.updateUserSessionInformations(user);
   }
 
   setUserSessionInformations(user){
     io.sockets.to(user.socketid).emit('setSessionInformations', { id : user.id, socketid : user.socketid, email : user.email });
+  }
+
+  updateUserSessionInformations(user){
+    io.sockets.to(user.socketid).emit('updateSessionInformations', { id : user.id, socketid : user.socketid, email : user.email });
   }
 
 }

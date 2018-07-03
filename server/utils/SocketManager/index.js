@@ -11,13 +11,9 @@ class SocketManager {
         console.log('[SocketManager] connect() function called')
         console.log('[SocketManager] a client connected, client\'s socket id = ' + clientSocket.id)
 
-        setTimeout(()=> this.checkIfUserExists(clientSocket), 1000);
+        this.checkIfUserExists(clientSocket);
 
-        clientSocket.on('answerCheckIfClientExists', (clientExists) => {
-          if(clientExists){
-            UserManager.updateUserSocketID(clientSocket);
-          }
-        })
+        clientSocket.on('answerCheckIfClientExists', (clientsocketid) => this.answerCheckIfClientExists(clientsocketid, clientSocket))
 
         clientSocket.on('componentDidMount', () => console.log('componentDidMount()'))
 
@@ -40,11 +36,14 @@ class SocketManager {
         clientSocket.on('getFriend', (email) => this.getFriends(email, clientSocket));
 
         clientSocket.on('onMessage', (obj) => ChatManager.onMessage(obj.message, clientSocket.id, UserManager.getUserByEmail(obj.receiver).socketid ) );
+
         // this.populate();
       }
 
-    testMessage(message, client){
-      console.log(message);
+    answerCheckIfClientExists(clientsocketid, client){
+      if(clientsocketid !== null){
+        UserManager.updateUserSocketID(UserManager.getUserBySocketID(clientsocketid), client.id);
+      }
     }
 
     checkIfUserExists(client){
@@ -54,7 +53,7 @@ class SocketManager {
     }
 
     // populate(){
-    //     console.log("okokokok")
+    //
     //     var listCompetence =["C", "C#","C++","AngularJS","Angular 2", "Angular 4", "Angular 5", "ReactJS", "Python", "git", "docker", "java", "j2ee", "kotlin","swift", "cordova", "html", "css", "js", "VueJs", "Ajax", "Jquery", "php"]
 
     //     // Random Creating User
