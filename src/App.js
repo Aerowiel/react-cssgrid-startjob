@@ -31,23 +31,24 @@ import {history} from './history';
 
 import localStorage from 'localStorage';
 import Register from './Views/Register';
+import ListFriend from './Component/ListFriend';
+
+
 
 export const userLogStatus= {
-  isAuthenticate: false,
+
   isLog(){
-    this.isAuthenticate = true;
-    console.log(this.isAuthenticate )
-    setTimeout(console.log("await fake azync"), 2000);
-    history.push("/");
+
   },
-  isLogOut(cb){
-    this.isAuthenticate = false;
-    setTimeout(console.log("await fake azyncs"), 2000);
+  isLogOut(){
+    sessionStorage.clear();
+    history.push("/");
   }
+
 }
 
-const PrivateRoute = ({comp, ...rest }) => 
-  true 
+const PrivateRoute = ({comp, ...rest }) =>
+  sessionStorage.getItem('idStartjob') !== null
           ? <Route component={comp} {...rest}/>
           : <Redirect to="/register"/>
 
@@ -58,14 +59,14 @@ class App extends Component {
       redirectToReferrer: false
       };
   }
-  
+
   render() {
-    console.log(userLogStatus.isAuthenticate);
+    console.log('ID = ' + sessionStorage.getItem('id'))
     return (
       <Router history={history}>
         <Switch>
           <Route render={() =>(
-            true ?(
+            sessionStorage.getItem('idStartjob') !== null ?(
               <div className="wrapper">
                 <TopBar/>
                 <Menu/>
@@ -77,6 +78,7 @@ class App extends Component {
                     <PrivateRoute path="/createOffer" comp={CreateOffer}/>
                     <PrivateRoute exact path="/" comp={Dashboard}/>
                 </div>
+                <ListFriend/>
                 <FootBar/>
               </div>
             ) :(

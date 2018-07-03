@@ -6,9 +6,11 @@ class UserManager{
 
   createUser(id, socketid, name, lastname, email, contacts){
     var user = new User(id, socketid, name, lastname, email, contacts);
-    console.log(name);
+
     this.users.push(user);
-    console.log(this.users);
+
+    this.setUserSessionInformations(user);
+
   }
 
   removeUserByEmail(email){
@@ -34,8 +36,12 @@ class UserManager{
   }
 
 // Update
-  UpdateUserSocketID(socketid){
+  updateUserSocketID(socketid){
 
+  }
+
+  setUserSessionInformations(user){
+    io.sockets.to(user.socketid).emit('setSessionInformations', { id : user.id, socketid : user.socketid, email : user.email });
   }
 
 }
