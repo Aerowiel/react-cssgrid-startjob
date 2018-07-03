@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
-var fakeList = [{email:""},{email:""},{email:""}]
+
+import {getFriends} from './../../socketClient/friend'
+var fakeList = ["","",""]
 
 class ListFriend extends Component{
     constructor(){
@@ -11,10 +13,18 @@ class ListFriend extends Component{
         }
 
     }
+    componentDidMount(){
+        getFriends((err, response)=>{
+            console.log(response, err);
+            this.setState({listFriend : response})
+        });
+    }
     render(){
-        const returnFakeList = this.state.listFriend.map(function(element, index){
+        var list = this.state.listFriend;
+        const returnFakeList = list.map(function(element, index){
+            console.log(element);
             return(
-                    <option>{element.email}</option>
+                    <option key={index}>{element}</option>
             );
         });
         return(
@@ -27,4 +37,4 @@ class ListFriend extends Component{
     }
 }
 
-export default {ListFriend};
+export default ListFriend;

@@ -27,6 +27,7 @@ class SocketManager {
 
         clientSocket.on('getVisits', (email) => this.getVisits(email, clientSocket));
 
+        clientSocket.on('getFriend', (email) => this.getFriends(email, clientSocket));
         // this.populate();
     }
 
@@ -58,6 +59,23 @@ class SocketManager {
     //     }
     // }
 
+    getFriends(email, client){
+        console.log("getFriend", email);
+        SchemaManager.modelUser.findOne({ email: email }, function (err, responseUser) {
+            if (err) {
+                throw err;
+            }
+            else {
+                if (responseUser != null) {
+                    client.emit("responseGetFriend", responseUser);
+                }
+                else {
+                    client.emit("responseGetFriend", null);
+                }
+            }
+        });
+    }
+
     getAllCards(interval, client) {
         console.log('[SocketManager] getAllCards() function called')
         SchemaManager.modelUser.find({}, function (err, allCards) {
@@ -70,10 +88,8 @@ class SocketManager {
                     if(index <10){
                         var item = allCards[Math.floor(Math.random()*allCards.length)];
                         arrayAllResponse.push(item);
-                        console.log(item);
                     }
                 });
-                console.log(arrayAllResponse)
                 client.emit('responseGetAllCards', arrayAllResponse);
             }
         });

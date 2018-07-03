@@ -22,6 +22,7 @@ class Login extends Component {
         };
     }
     submitConnect(){
+        console.log("")
       // this.props.history.push("/")
       const { history } = this.props; 
       console.log(history);
@@ -31,9 +32,8 @@ class Login extends Component {
         );
     }
     setStorageUser(returnUser){
-        console.log(returnUser);
         if(returnUser){
-            console.log(returnUser)
+            console.log("returnOK")
             userLogStatus.isLog();
             history.push("/");
         }
