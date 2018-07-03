@@ -32,6 +32,9 @@ import {history} from './history';
 import localStorage from 'localStorage';
 import Register from './Views/Register';
 
+import {getSession} from './socketClient/session'
+
+
 
 export const userLogStatus= {
 
@@ -58,6 +61,11 @@ class App extends Component {
       };
   }
 
+  componentWillMount(){
+    socketClient.emit('componentDidMount');
+    getSession();
+
+  }
   render() {
     console.log('ID = ' + sessionStorage.getItem('id'))
     return (

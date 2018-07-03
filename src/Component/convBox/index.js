@@ -75,7 +75,8 @@ class ConvBox extends Component{
                 style={this.props.style}
                 id={this.props.id}
             >
-                <span onClick={this.props.closeConvoBox.bind(this)}>x</span>
+                <span onClick={this.props.closeConvoBox.bind(this)}>X</span>
+                <div style={{marginLeft:'25%'}} >{this.props.id}</div>
                 <ChatFeed
                     messages={this.state.messages} // Boolean: list of message objects
                     isTyping={this.state.is_typing} // Boolean: is the recipient typing

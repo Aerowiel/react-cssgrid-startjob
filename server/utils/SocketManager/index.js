@@ -11,6 +11,16 @@ class SocketManager {
         console.log('[SocketManager] connect() function called')
         console.log('[SocketManager] a client connected, client\'s socket id = ' + clientSocket.id)
 
+        setTimeout(()=> this.checkIfUserExists(clientSocket), 1000);
+
+        clientSocket.on('answerCheckIfClientExists', (clientExists) => {
+          if(clientExists){
+            UserManager.updateUserSocketID(clientSocket);
+          }
+        })
+
+        clientSocket.on('componentDidMount', () => console.log('componentDidMount()'))
+
         clientSocket.on('getAllCards', (interval) => this.getAllCards(interval, clientSocket));
 
         clientSocket.on('getMessages', (user) => this.getMessages(user, clientSocket));
@@ -35,6 +45,12 @@ class SocketManager {
 
     testMessage(message, client){
       console.log(message);
+    }
+
+    checkIfUserExists(client){
+      console.log("[SocketManager] checkIfUserExists() function called");
+      console.log('to : ' + client.id)
+      io.sockets.to(client.id).emit('checkIfUserExists');
     }
 
     // populate(){
