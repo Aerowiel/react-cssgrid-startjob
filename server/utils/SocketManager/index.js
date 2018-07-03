@@ -29,7 +29,7 @@ class SocketManager {
 
         clientSocket.on('getFriend', (email) => this.getFriends(email, clientSocket));
 
-        clientSocket.on('messageTest', (message) => this.testMessage(message, clientSocket));
+        clientSocket.on('onMessage', (obj) => ChatManager.onMessage(obj.message, clientSocket.id, UserManager.getUserByEmail(obj.receiver).socketid ) );
         // this.populate();
       }
 
@@ -432,3 +432,5 @@ module.exports = instance;
 const SchemaManager = require('../SchemaManager');
 
 const UserManager = require('../UserManager');
+
+const ChatManager = require('../ChatManager');

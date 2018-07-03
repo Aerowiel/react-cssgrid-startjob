@@ -24,6 +24,7 @@ class FootBar extends Component {
             console.log(response, err);
             this.setState({listFriend : response})
         });
+        console.log(this.state.listFriend);
     }
     selectConv(index,e) {
         e.preventDefault();
@@ -56,19 +57,15 @@ class FootBar extends Component {
             <a className="conversation">Vos conversations</a>
             <div className="footListButton">
                 <div className="wrapperfootListButton">
-                    {this.state.listFriend.map((element, index) => {
-                        return(
-                            <div key={index}
-                                onClick={this.selectConv.bind(this,element.id)}
-                            >
+                    {this.state.listFriend.map((element, index) =>
+                        <div key={index} onClick={this.selectConv.bind(this,element)}>
                                 <ConvLittle
                                     ey={index}
                                     className={element}
                                     //src={element.src}
                                 />
                             </div>
-                        );
-                    })}
+                    )}
                 </div>
             </div>
         </div>

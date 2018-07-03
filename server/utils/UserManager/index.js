@@ -24,6 +24,7 @@ class UserManager{
     });
 }
   getUserBySocketID(socketid){
+    console.log(this.users);
     return this.users.find(user => user.socketid === socketid );
 }
 
