@@ -38,8 +38,9 @@ class SocketManager {
         clientSocket.on('onMessage', (obj) => ChatManager.onMessage(obj.message, clientSocket.id, UserManager.getUserByEmail(obj.receiver).socketid ) );
 
         clientSocket.on('getAllOffers', () => this.getAllOffers(clientSocket));
-
-        // this.populate();
+        
+        //DECOMMENT THIS LINE FOR POPUALTE YOUR MONGODB
+        // this.populateDB();
       }
 
     answerCheckIfClientExists(clientsocketid, client){
@@ -54,33 +55,38 @@ class SocketManager {
       io.sockets.to(client.id).emit('checkIfUserExists');
     }
 
-    // populate(){
-    //
-    //     var listCompetence =["C", "C#","C++","AngularJS","Angular 2", "Angular 4", "Angular 5", "ReactJS", "Python", "git", "docker", "java", "j2ee", "kotlin","swift", "cordova", "html", "css", "js", "VueJs", "Ajax", "Jquery", "php"]
+    populateDB(){
+    
+        var listCompetence =["C", "C#","C++","AngularJS","Angular 2", "Angular 4", "Angular 5", "ReactJS", "Python", "git", "docker", "java", "j2ee", "kotlin","swift", "cordova", "html", "css", "js", "VueJs", "Ajax", "Jquery", "php"]
+        var listEmploiNow= ["Developpeur Mobile", "Designer", "Chef de Projet", "Developper Web", "Consultant Technique", "DataScientist"];
+        var listFormation = ["HEC", "EPITECH", "YNOV", "Bac Pro Cuisine", "BTP"];
+        var listLastJob = ["Pere Noel", "Kebabier", "Epouvantail", "Astronaute", "Bourreau", "Président de la République"];
+        var listInterest =["sport", "gaming", "tchilling", "Holidays"];
+        var listDescription=["J'adore la biere", "Je suis passionée par les bonzais","Mon secret est que ce n'est pas moi sur cette carte", "C'est ma 300e candidature pour un stage","Spoil GOT: Tyrion fini par grandir"];
+        // Random Creating User
+        for(var i=0; i <194; i++){
+            console.log("super")
+            var nameRandom = randomName.last()
+            var firstName = randomName.first()
+            var populateComp = [];
+            for(var x=0; x <4; x++){
+                 var item = listCompetence[Math.floor(Math.random()*listCompetence.length)];
+                 populateComp.push(item)
+            }
 
-    //     // Random Creating User
-    //     for(var i=0; i <100; i++){
-    //         console.log("super")
-    //         var nameRandom = randomName.last()
-    //         var firstName = randomName.first()
-    //         var populateComp = [];
-    //         for(var x=0; x <4; x++){
-    //              var item = listCompetence[Math.floor(Math.random()*listCompetence.length)];
-    //              populateComp.push(item)
-    //         }
-    //         var picture = "/src/images/randomPic/fakePic"+i+".jpg"
-    //         var user = { name: nameRandom, username: firstName,dateOfBirth: "", email: nameRandom+"."+firstName+"@gmail.com", password: nameRandom, emploiNow: null,picture:picture, formation: null, listLastEmploy: null, description: null, listCompetence: populateComp, listInterest: null  }
+            var picture = "/src/images/randomPic/fakePic"+i+".jpg"
+            var user = { name: nameRandom, username: firstName,dateOfBirth: "", email: nameRandom+"."+firstName+"@gmail.com", password: nameRandom, emploiNow: listEmploiNow[Math.floor(Math.random()*listEmploiNow.length)],picture:picture, formation: listFormation[Math.floor(Math.random()*listFormation.length)], listLastEmploy: listLastJob[Math.floor(Math.random()*listLastJob.length)], description: listDescription[Math.floor(Math.random()*listDescription.length)], listCompetence: populateComp, listInterest: listInterest[Math.floor(Math.random()*listInterest.length)]  }
 
-    //         SchemaManager.modelUser.create(user, function(err, response){
-    //             if(err){
-    //                 throw err;
-    //             }
-    //             else{
-    //                 console.log(response);
-    //             }
-    //         });
-    //     }
-    // }
+            SchemaManager.modelUser.create(user, function(err, response){
+                if(err){
+                    throw err;
+                }
+                else{
+                    console.log(response);
+                }
+            });
+        }
+    }
     getAllOffers(client){
         console.log("getAlloffer called")
         SchemaManager.modelOffers.find({}, function(err, response){
@@ -103,6 +109,7 @@ class SocketManager {
                 throw err;
             }
             else {
+                console.log(responseUser);
                 if (responseUser != null) {
                     client.emit("responseGetFriend", responseUser);
                 }

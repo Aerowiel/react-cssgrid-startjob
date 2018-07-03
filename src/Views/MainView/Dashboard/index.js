@@ -58,6 +58,9 @@ class Dashboard extends Component {
           <div key= {i} className="wrapperCard">
                 <div className="cardHeader customHeader">
                     <button className="languageCard"><img src="/src/images/worldwide.png"/></button>
+                    <div className="cardFormation">
+                        <a>{element.formation}</a>
+                     </div>
                     <img className="cardImage" src={element.picture}/>
                       <div className="cardNames">
                         <a>{element.username}</a>
@@ -67,21 +70,45 @@ class Dashboard extends Component {
                       <div className="cardEmail">
                         <a>{element.email}</a>
                       </div>
-                      <div className="cardEmploy">
-                        <a>{element.emploiNow}</a>
-                      </div>
+                      
+                    
                 </div>
                 <div className="cardContent">
                   <div className="listComp">
                     {
                       element.listCompetence.map(function(item, index){
                           return(
-                            <div>
+                            <div key={index}>
                               {item}
                             </div>
                           )
                       })
                     }
+                  </div>
+                  <div className="listLastEmploy">
+                    {
+                      element.listLastEmploy.map(function(item, index){
+                          return(
+                            <div key={index}>
+                              {item}
+                            </div>
+                          )
+                      })
+                    }
+                  </div>
+                  <div className="listInterest">
+                    {
+                      element.listInterest.map(function(item, index){
+                          return(
+                            <div key={index}>
+                              {item}
+                            </div>
+                          )
+                      })
+                    }
+                  </div>
+                  <div className="cardDescription">
+                    {element.description}
                   </div>
                   <button>Message</button>
                   <button onClick={that.destroyCard.bind(that)}>Next</button>
