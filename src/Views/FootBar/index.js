@@ -45,7 +45,7 @@ class FootBar extends Component {
                 <div className="wrapperfootListButton">
                     {this.state.listOpenConv.map((element, index) => {
                         return(
-                            <div
+                            <div key={index}
                                 onClick={this.selectConv.bind(this,index)}
                             >
                                 <ConvLittle

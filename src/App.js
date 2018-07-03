@@ -31,8 +31,8 @@ import {history} from './history';
 
 import localStorage from 'localStorage';
 import Register from './Views/Register';
-import ListFriend from './Component/ListFriend';
 
+import Friend from './Views/ListFriend'
 
 
 export const userLogStatus= {
@@ -78,7 +78,7 @@ class App extends Component {
                     <PrivateRoute path="/createOffer" comp={CreateOffer}/>
                     <PrivateRoute exact path="/" comp={Dashboard}/>
                 </div>
-                <ListFriend/>
+                <Friend/>
                 <FootBar/>
               </div>
             ) :(
