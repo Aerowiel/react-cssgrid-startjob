@@ -3,30 +3,51 @@ import {
   Link,
 } from 'react-router-dom';
 import ConvLittle from '../../Component/ConvLittle';
-
+import ConvBox from '../../Component/convBox/index';
 class FootBar extends Component {
     constructor(){
         super();
         this.state = {
-            listOpenConv : [{src:"/src/images/user.png"},{src:"/src/images/user.png"}]
+            listOpenConv : [{src:"/src/images/user.png"},{src:"/src/images/user.png"}],
+            selectedConvo: false
         }
     }
-
-  render() {
-    var documentConvLittle = this.state.listOpenConv.map(function(element, index){
-        return(
-            <ConvLittle key={index} src={element.src}/>
-        );
-    });
+    selectConv(index,e) {
+        e.preventDefault();
+        console.log("something")
+        this.setState({
+            selectedConv: true,
+            sleectedconvindex: index
+        })
+    }
+    render() {
+    const size = 200 + this.state.sleectedconvindex*50
     return (
     <div className="footBar"> 
+        {this.state.selectedConv && 
+            <ConvBox
+                style={{
+                    left: size
+                }}
+            />
+        }
         <div className="wrapperTopBar">
             <a className="conversation">Vos conversations</a>
             <div className="footListButton">
                 <div className="wrapperfootListButton">
-                    {documentConvLittle}
+                    {this.state.listOpenConv.map((element, index) => {
+                        return(
+                            <div
+                                onClick={this.selectConv.bind(this,index)}
+                            >
+                                <ConvLittle
+                                    ey={index} 
+                                    src={element.src}
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
-
             </div>
         </div>
     </div>

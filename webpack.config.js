@@ -9,7 +9,7 @@ module.exports = {
   module :{
     rules : [
       {
-        test: /\.(js|jsx)$/,
+        test: /.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
@@ -17,14 +17,15 @@ module.exports = {
         }
       },
       {
-        test:/\.scss$/,
-        exclude: /node_modules/,
-        use:[
-          "style-loader", // creates style nodes from JS strings
-          "css-loader", // translates CSS into CommonJS
-          "sass-loader" // compiles Sass to CSS
-        ]
-      }
+        test: /\.(sass|s?css)$/,
+        use: [{
+            loader: 'style-loader'
+        }, {
+            loader: 'css-loader'
+        }, {
+            loader: 'sass-loader'
+        }]
+      },
     ]
   },
   plugins:[

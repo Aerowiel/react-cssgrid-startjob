@@ -16,8 +16,10 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
     "webpack": "^4.12.1",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4"
@@ -28,7 +30,7 @@
     "babel-preset-stage-3": "^6.24.1",
     "bcrypt": "^2.0.1",
     "cloudinary": "^1.11.0",
-    "css-loader": "^0.28.11",
+    "eslint": "^5.0.1",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
     "html-webpack-plugin": "^3.2.0",
@@ -36,6 +38,8 @@
     "mongoose": "^5.1.6",
     "random-name": "^0.1.2",
     "react": "^16.4.1",
+    "react-chat-ui": "^0.3.2",
+    "react-chat-widget": "^2.1.3",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.3",
     "react-redux": "^5.0.7",
@@ -45,7 +49,6 @@
     "require-dir": "^1.0.0",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
-    "style-loader": "^0.21.0",
     "transform-runtime": "0.0.0"
   }
 }
