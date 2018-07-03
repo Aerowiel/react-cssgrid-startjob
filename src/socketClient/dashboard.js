@@ -8,6 +8,7 @@ function getAllCards(callback){
 
 function getAllOffer(callback){
   socketClient.on('responseGetAllOffer', offers => callback(null, offers));
-  socketClient.emit('getAllOffer');
+  socketClient.emit('getAllOffers');
 }
+
 export { getAllCards, getAllOffer};

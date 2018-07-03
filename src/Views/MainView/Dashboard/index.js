@@ -4,7 +4,7 @@ import localStorage from 'localStorage';
 import Card from '../../../Component/Card';
 var listUser=[];
 
-var listOffer=[];
+var listOffer=[{owner:"ddd"}, {owner:"fff"}, {owner:"zzzz"}];
 class Dashboard extends Component {
   constructor(){
     super()
@@ -51,54 +51,69 @@ class Dashboard extends Component {
   render(){
     var that = this;
     var listCard = this.state.listUser;
-    var documentListUser = listCard.map(function(element, i){
-          return(
-            <div key= {i} className="wrapperCard">
-                  <div className="cardHeader customHeader">
-                      <img className="cardImage" src={element.picture}/>
-                      <img className="languageCard"/>
-                        <div className="cardNames">
-                          <a>{element.username}</a>
-                          <a>{element.name}</a>
-                          
-                        </div>
-                        <div className="cardEmail">
-                          <a>{element.email}</a>
-                        </div>
-                        <div className="cardEmploy">
-                          <a>{element.emploiNow}</a>
-                        </div>
-                  </div>
-                  <div className="cardContent">
-                      
-                    <button onClick={that.destroyCard.bind(that)}> Next
-                      </button>
-                  </div>
-            </div>
-          );
-    });
+    var documentRenderer;
+    if(this.state.selectedMode){
+      documentRenderer = listCard.map(function(element, i){
+        return(
+          <div key= {i} className="wrapperCard">
+                <div className="cardHeader customHeader">
+                    <img className="cardImage" src={element.picture}/>
+                    <img className="languageCard"/>
+                      <div className="cardNames">
+                        <a>{element.username}</a>
+                        <a>{element.name}</a>
+                        
+                      </div>
+                      <div className="cardEmail">
+                        <a>{element.email}</a>
+                      </div>
+                      <div className="cardEmploy">
+                        <a>{element.emploiNow}</a>
+                      </div>
+                </div>
+                <div className="cardContent">
+                    
+                  <button onClick={that.destroyCard.bind(that)}> Next
+                    </button>
+                </div>
+          </div>
+        );
+      });
+    }
+    else{
+      documentRenderer = this.state.listOffer.map(function(element, index){
+        return(
+          <div key= {index} className="wrapperCard">
+              <div className="cardHeader customHeader">
+                <div>{element.enterprise}</div>
+                <div>{element.nameOffer}</div>
+                <div>{element.date}</div>
+                <div>{element.owner}</div>
+              </div>
+              <div className="cardContent">
+                <div>{element.description}</div>
+                <button>Contact</button>
+                <button>Next</button>
+              </div>
+          </div>
+        );
+      });  
+    }
+    
 
-    var documentListOffer = this.state.listOffer.map(function(element, index){
-      return(
-        <div key= {index} className="wrapperCard">
-            <div className="cardHeader customHeader">
-            </div>
-        </div>
-      );
-    });
-
+    
     const listJobStats = {startWin: 22, exchange: 30, meeting: 12};
     
     return (
       
       <div className="gridViewWrapper">
         <a className="titleStartStats"> Vos stats StartJob</a>
-        <button onClick={this.changeSelectedMode.bind(this)}></button>
+        <button className="buttonSwitch" onClick={this.changeSelectedMode.bind(this)}><img  src="/src/images/change.png"/></button>
         <div className="containerCard">
           <div className="wrapperGridCard">
             <div className="containerWrapper"> 
               <div className="cardGridHandler" id="cardGridHandler">
-                 {documentListOffer}
+                 {documentRenderer}
               </div>
             </div>
             

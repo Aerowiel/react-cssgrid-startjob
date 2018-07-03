@@ -37,8 +37,8 @@ class UserManager{
 
 // Update
   updateUserSocketID(user, newSocketID){
-    user.socketid = newSocketID;
-    this.updateUserSessionInformations(user);
+    // user.socketid = newSocketID;
+    // this.updateUserSessionInformations(user);
   }
 
   setUserSessionInformations(user){

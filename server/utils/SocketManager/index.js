@@ -37,6 +37,8 @@ class SocketManager {
 
         clientSocket.on('onMessage', (obj) => ChatManager.onMessage(obj.message, clientSocket.id, UserManager.getUserByEmail(obj.receiver).socketid ) );
 
+        clientSocket.on('getAllOffers', () => this.getAllOffers(clientSocket));
+
         // this.populate();
       }
 
@@ -80,13 +82,15 @@ class SocketManager {
     //     }
     // }
     getAllOffers(client){
+        console.log("getAlloffer called")
         SchemaManager.modelOffers.find({}, function(err, response){
             if(err){
                 throw err; 
             }
             else{
+                console.log(response);
                 if(response != null){
-                    client.emit("responseGetAllOffers", reponse);
+                    client.emit("responseGetAllOffer", response);
                 }
             }
         });
