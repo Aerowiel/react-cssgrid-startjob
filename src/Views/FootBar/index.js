@@ -4,13 +4,25 @@ import {
 } from 'react-router-dom';
 import ConvLittle from '../../Component/ConvLittle';
 import ConvBox from '../../Component/convBox/index';
+
+import {getFriends} from './../../socketClient/friend';
+var fakeList = ["","",""]
+
+
 class FootBar extends Component {
     constructor(){
         super();
         this.state = {
-            listOpenConv : [{src:"/src/images/user.png"},{src:"/src/images/user.png"}],
-            selectedConvo: false
+            selectedConvo: false,
+            listFriend : fakeList
+
         }
+    }
+    componentDidMount(){
+        getFriends((err, response)=>{
+            console.log(response, err);
+            this.setState({listFriend : response})
+        });
     }
     selectConv(index,e) {
         e.preventDefault();
@@ -35,14 +47,15 @@ class FootBar extends Component {
             <a className="conversation">Vos conversations</a>
             <div className="footListButton">
                 <div className="wrapperfootListButton">
-                    {this.state.listOpenConv.map((element, index) => {
+                    {this.state.listFriend.map((element, index) => {
                         return(
                             <div key={index}
                                 onClick={this.selectConv.bind(this,index)}
                             >
                                 <ConvLittle
-                                    ey={index} 
-                                    src={element.src}
+                                    ey={index}
+                                    className={element} 
+                                    //src={element.src}
                                 />
                             </div>
                         );
