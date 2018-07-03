@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { getAllCards} from '../../../socketClient/dashboard';
 import localStorage from 'localStorage';
 import Card from '../../../Component/Card';
-var listUser=[{name:"Carte Principal",username:"Jesus", name:"Christ", emploiNow:"Dieu à temps plein", src:"/src/images/user.png"},{name:"Carte Secondaire",username:"Pere", name:"Noel", emploiNow:"Fdp à temps plein",src:"/src/images/user.png"},{name:"Carte 3",username:"Raoul", name:"Iglesias", emploiNow:"Chanteur PT à temps plein",src:"/src/images/user.png"},{name:"Carte 4",username:"Pere Fouettar", name:"Lucifer", emploiNow:"Dieu à temps plein",src:"/src/images/user.png"}, {name:"carte 5",username:"Mars", name:"Hares", emploiNow:"Dieu à temps plein",src:"/src/images/user.png"}, {carte:"carte 6",username:"Zeus", name:"Jupiter", emploiNow:"Dieu à temps plein",src:"/src/images/user.png"}, {carte: "carte 7",username:"Michael", name:"Schumarer", emploiNow:"Dieu à temps plein",src:"/src/images/user.png"}, {nname:"carte 8",username:"Sadam", name:"Hussen", emploiNow:"fdp à temps plein",src:"/src/images/user.png"}, {name:"carte 9",username:"Gandhi", name:"Le grand fou", emploiNowNow:"Fummette à temps plein",src:"/src/images/user.png"}, {name:"carte 10",username:"Moundir", name:"Koh Lanta", emploiNowNow:"fdp à temps plein",src:"/src/images/user.png"}];
+var listUser=[];
 
 
 class Dashboard extends Component {
@@ -42,7 +42,7 @@ class Dashboard extends Component {
     var that = this;
     var listCard = this.state.listUser;
     var documentListUser = listCard.map(function(element, i){
-      console.log(element);
+      console.log('this is card',element);
       if(i < 9){
         if(i%2){
           return(
@@ -63,6 +63,7 @@ class Dashboard extends Component {
                         </div>
                   </div>
                   <div className="cardContent">
+                      
                     <button onClick={that.destroyCard.bind(that)}> Next
                       </button>
                   </div>
