@@ -30,6 +30,8 @@ class SocketManager {
         clientSocket.on('getFriend', (email) => this.getFriends(email, clientSocket));
 
         clientSocket.on('messageTest', (message) => this.testMessage(message, clientSocket));
+
+        clientSocket.on('getAllOffers', () => this.getAllOffers(clientSocket));
         // this.populate();
       }
 
@@ -64,6 +66,18 @@ class SocketManager {
     //         });
     //     }
     // }
+    getAllOffers(client){
+        SchemaManager.modelOffers.find({}, function(err, response){
+            if(err){
+                throw err; 
+            }
+            else{
+                if(response != null){
+                    client.emit("responseGetAllOffers", reponse);
+                }
+            }
+        });
+    }
 
     getFriends(email, client){
         console.log("getFriend", email);

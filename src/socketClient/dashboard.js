@@ -5,4 +5,9 @@ function getAllCards(callback){
   socketClient.on('responseGetAllCards',card => callback(null, card));
   socketClient.emit('getAllCards', 1000);
 }
-export { getAllCards };
+
+function getAllOffer(callback){
+  socketClient.on('responseGetAllOffer', offers => callback(null, offers));
+  socketClient.emit('getAllOffer');
+}
+export { getAllCards, getAllOffer};

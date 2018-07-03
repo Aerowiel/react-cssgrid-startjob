@@ -12,6 +12,9 @@ class SchemaManager {
 
         var schemaUserVisits = new mongoose.Schema({ userName: 'string', listUserVisit: [{ name: 'string' }, { date: 'date' }], listVisitedByUser: [{ name: 'string' }, { date: 'date' }] }, { collection: 'userVisits' });
         this.modelVisits = mongoose.model('userVisits', schemaUserVisits);
+
+        var schemaOffers = new mongoose.Schema({owner: 'string', nameOffer:'string', description:'string', date:'string', compSearched: 'array'}, {collection: 'proOffers'})
+        this.modelOffers = mongoose.model('proOffers', schemaOffers);
     }
 
 

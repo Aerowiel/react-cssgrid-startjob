@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
-import { getAllCards} from '../../../socketClient/dashboard';
+import { getAllCards, getAllOffer} from '../../../socketClient/dashboard';
 import localStorage from 'localStorage';
 import Card from '../../../Component/Card';
 var listUser=[];
 
-
+var listOffer=[];
 class Dashboard extends Component {
   constructor(){
     super()
 
     this.state ={
         listUser : listUser,
-        selectedMode: 'User'
+        selectedMode: true,
+        listOffer : listOffer
     }
   }
   componentDidMount(){
     getAllCards((err, cards) => 
       this.setState({ listUser : cards })
     ); 
+
+    getAllOffer((err, offers) =>
+      this.setState({ listOffer : offers})
+    )
   }
   destroyCard(e){
     if(this.state.listUser.length < 2){
@@ -37,12 +42,18 @@ class Dashboard extends Component {
     this.render()
   }
 
+  changeSelectedMode(){
+    this.setState({
+      selectedMode : !this.state.selectedMode
+    })
+  }
+
   render(){
     var that = this;
     var listCard = this.state.listUser;
     var documentListUser = listCard.map(function(element, i){
           return(
-            <div key= {i} className={"wrapperCard "+ "customInterest0"}>
+            <div key= {i} className="wrapperCard">
                   <div className="cardHeader customHeader">
                       <img className="cardImage" src={element.picture}/>
                       <img className="languageCard"/>
@@ -67,17 +78,27 @@ class Dashboard extends Component {
           );
     });
 
+    var documentListOffer = this.state.listOffer.map(function(element, index){
+      return(
+        <div key= {index} className="wrapperCard">
+            <div className="cardHeader customHeader">
+            </div>
+        </div>
+      );
+    });
+
     const listJobStats = {startWin: 22, exchange: 30, meeting: 12};
     
     return (
       
       <div className="gridViewWrapper">
         <a className="titleStartStats"> Vos stats StartJob</a>
+        <button onClick={this.changeSelectedMode.bind(this)}></button>
         <div className="containerCard">
           <div className="wrapperGridCard">
             <div className="containerWrapper"> 
               <div className="cardGridHandler" id="cardGridHandler">
-                 {documentListUser}
+                 {documentListOffer}
               </div>
             </div>
             
