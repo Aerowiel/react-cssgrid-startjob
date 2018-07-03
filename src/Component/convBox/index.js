@@ -11,6 +11,13 @@ class ConvBox extends Component{
     }
 
     componentWillMount() {
+        socketClient.on('receivedMessage', (obj) => {
+          console.log(obj.senderEmail + "sent : " + obj.message);
+          this.setState({messages : [
+              ...this.state.messages,
+              new Message({ id: obj.senderEmail, message: obj.message }), // Blue bubble
+          ]});
+        });
 
         // this.props.id
     }
@@ -50,7 +57,7 @@ class ConvBox extends Component{
     sendMessage(e) {
         e.preventDefault();
 
-        socketClient.emit('messageTest', 'test message from ' + sessionStorage.getItem('socketidStartjob') + ' to ' + this.props.id )
+        socketClient.emit('onMessage', { message : e.target.elements[0].value, receiver : this.props.id } )
         console.log(e.target.elements[0].value)
         this.setState({
             messages : [
@@ -66,8 +73,10 @@ class ConvBox extends Component{
             <div
                 className="convoBox"
                 style={this.props.style}
+                id={this.props.id}
             >
-                <span onClick={this.props.closeConvoBox.bind(this)}>x</span>
+                <span onClick={this.props.closeConvoBox.bind(this)}>X</span>
+                <div style={{marginLeft:'25%'}} >{this.props.id}</div>
                 <ChatFeed
                     messages={this.state.messages} // Boolean: list of message objects
                     isTyping={this.state.is_typing} // Boolean: is the recipient typing

@@ -11,6 +11,12 @@ class SocketManager {
         console.log('[SocketManager] connect() function called')
         console.log('[SocketManager] a client connected, client\'s socket id = ' + clientSocket.id)
 
+        this.checkIfUserExists(clientSocket);
+
+        clientSocket.on('answerCheckIfClientExists', (clientsocketid) => this.answerCheckIfClientExists(clientsocketid, clientSocket))
+
+        clientSocket.on('componentDidMount', () => console.log('componentDidMount()'))
+
         clientSocket.on('getAllCards', (interval) => this.getAllCards(interval, clientSocket));
 
         clientSocket.on('getMessages', (user) => this.getMessages(user, clientSocket));
@@ -29,18 +35,25 @@ class SocketManager {
 
         clientSocket.on('getFriend', (email) => this.getFriends(email, clientSocket));
 
-        clientSocket.on('messageTest', (message) => this.testMessage(message, clientSocket));
+        clientSocket.on('onMessage', (obj) => ChatManager.onMessage(obj.message, clientSocket.id, UserManager.getUserByEmail(obj.receiver).socketid ) );
 
-        clientSocket.on('getAllOffers', () => this.getAllOffers(clientSocket));
         // this.populate();
       }
 
-    testMessage(message, client){
-      console.log(message);
+    answerCheckIfClientExists(clientsocketid, client){
+      if(clientsocketid !== null){
+        UserManager.updateUserSocketID(UserManager.getUserBySocketID(clientsocketid), client.id);
+      }
+    }
+
+    checkIfUserExists(client){
+      console.log("[SocketManager] checkIfUserExists() function called");
+      console.log('to : ' + client.id)
+      io.sockets.to(client.id).emit('checkIfUserExists');
     }
 
     // populate(){
-    //     console.log("okokokok")
+    //
     //     var listCompetence =["C", "C#","C++","AngularJS","Angular 2", "Angular 4", "Angular 5", "ReactJS", "Python", "git", "docker", "java", "j2ee", "kotlin","swift", "cordova", "html", "css", "js", "VueJs", "Ajax", "Jquery", "php"]
 
     //     // Random Creating User
@@ -446,3 +459,5 @@ module.exports = instance;
 const SchemaManager = require('../SchemaManager');
 
 const UserManager = require('../UserManager');
+
+const ChatManager = require('../ChatManager');
