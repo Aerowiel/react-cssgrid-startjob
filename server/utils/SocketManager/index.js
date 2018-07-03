@@ -43,10 +43,10 @@ class SocketManager {
     //         var populateComp = [];
     //         for(var x=0; x <4; x++){
     //              var item = listCompetence[Math.floor(Math.random()*listCompetence.length)];
-    //              console.log(item);
     //              populateComp.push(item)
     //         }
-    //         var user = { name: nameRandom, username: firstName,dateOfBirth: "", email: nameRandom+"."+firstName+"@gmail.com", password: nameRandom, emploiNow: null,picture:null, formation: null, listLastEmploy: null, description: null, listCompetence: populateComp, listInterest: null  }
+    //         var picture = "/src/images/randomPic/fakePic"+i+".jpg"
+    //         var user = { name: nameRandom, username: firstName,dateOfBirth: "", email: nameRandom+"."+firstName+"@gmail.com", password: nameRandom, emploiNow: null,picture:picture, formation: null, listLastEmploy: null, description: null, listCompetence: populateComp, listInterest: null  }
 
     //         SchemaManager.modelUser.create(user, function(err, response){
     //             if(err){

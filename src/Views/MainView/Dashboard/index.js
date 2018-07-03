@@ -42,13 +42,10 @@ class Dashboard extends Component {
     var that = this;
     var listCard = this.state.listUser;
     var documentListUser = listCard.map(function(element, i){
-      console.log(element);
-      if(i < 9){
-        if(i%2){
           return(
             <div key= {i} className={"wrapperCard "+ "customInterest0"}>
                   <div className="cardHeader customHeader">
-                      <img className="cardImage" src={element.src}/>
+                      <img className="cardImage" src={element.picture}/>
                       <img className="languageCard"/>
                         <div className="cardNames">
                           <a>{element.username}</a>
@@ -68,32 +65,6 @@ class Dashboard extends Component {
                   </div>
             </div>
           );
-        }
-        else{
-          return(
-            <div key= {i} className={"wrapperCard "+ "customInterest2"}>
-                  <div className="cardHeader customHeader">
-                      <img className="cardImage" src={element.src}/>
-                      <img className="languageCard"/>                        
-                        <div className="cardNames">
-                          <a>{element.username}</a>
-                          <a>{element.name}</a>
-                        </div>
-                        <div className="cardEmail">
-                          <a>{element.email}</a>
-                        </div>
-                        <div className="cardEmploy">
-                          <a>{element.emploiNow}</a>
-                        </div>
-                  </div>
-                  <div className="cardContent">
-                    <button onClick={that.destroyCard.bind(that)}> Next
-                      </button>
-                  </div>
-            </div>
-          );
-        }  
-      }
     });
 
     const listJobStats = {startWin: 22, exchange: 30, meeting: 12};
