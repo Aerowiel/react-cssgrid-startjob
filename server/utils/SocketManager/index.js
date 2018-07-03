@@ -1,13 +1,13 @@
 
 
 class SocketManager {
-    
+
     constructor() {
         //Random populate DB
-       
+
     }
     connect(clientSocket) {
-        
+
         console.log('[SocketManager] connect() function called')
         console.log('[SocketManager] a client connected, client\'s socket id = ' + clientSocket.id)
 
@@ -46,7 +46,7 @@ class SocketManager {
     //              populateComp.push(item)
     //         }
     //         var user = { name: nameRandom, username: firstName,dateOfBirth: "", email: nameRandom+"."+firstName+"@gmail.com", password: nameRandom, emploiNow: null,picture:null, formation: null, listLastEmploy: null, description: null, listCompetence: populateComp, listInterest: null  }
-           
+
     //         SchemaManager.modelUser.create(user, function(err, response){
     //             if(err){
     //                 throw err;
@@ -57,9 +57,9 @@ class SocketManager {
     //         });
     //     }
     // }
-    
+
     getAllCards(interval, client) {
-        console.log('[SocketManager] getAllCards function called')
+        console.log('[SocketManager] getAllCards() function called')
         SchemaManager.modelUser.find({}, function (err, allCards) {
             if (err) {
                 throw err;
@@ -71,7 +71,7 @@ class SocketManager {
                         var item = allCards[Math.floor(Math.random()*allCards.length)];
                         arrayAllResponse.push(item);
                         console.log(item);
-                    }                    
+                    }
                 });
                 console.log(arrayAllResponse)
                 client.emit('responseGetAllCards', arrayAllResponse);
@@ -80,6 +80,7 @@ class SocketManager {
     }
 
     getMessages(user, client) {
+      console.log('[SocketManager] getMessages() function called')
         SchemaManager.modelMessage.find({ username: user }, function (err, responseListConv) {
             if (err) {
                 throw err;
@@ -96,6 +97,7 @@ class SocketManager {
     }
 
     getNotification(userMail, client) {
+      console.log('[SocketManager] getNotification() function called')
         var listNewNotification = [];
         SchemaManager.modelNotification.findOne({ userMail: userMail }, function (err, responseNotifications) {
             if (err) {
@@ -118,6 +120,7 @@ class SocketManager {
     }
 
     deleteThisNotification(userMail, notificationToDelete, client) {
+        console.log('[SocketManager] deleteThisNotification() function called')
         SchemaManager.modelNotification.findOne({ userMail: userMail }, function (err, responseNotification) {
             if (err) {
                 throw err;
@@ -135,6 +138,7 @@ class SocketManager {
     }
 
     tryLogin(user, client) {
+        console.log('[SocketManager] tryLogin() function called')
         var userToFind = {email : user.email};
         SchemaManager.modelUser.findOne(userToFind, function(err, connectedUser){
             if(err){
@@ -143,7 +147,7 @@ class SocketManager {
             else{
                 if(connectedUser != null){
                     if(connectedUser.password == user.password){
-                        console.log('[SocketManager] function tryLogin()');
+                        console.log('[SocketManager] function tryLogin() success');
                         UserManager.createUser(connectedUser._id, client.id, connectedUser.name, connectedUser.username, connectedUser.email, []);
 
                         client.emit('responseTryLogin', connectedUser);
@@ -162,6 +166,7 @@ class SocketManager {
 
 
     register(user, client) {
+        console.log('[SocketManager] register() function called')
         console.log("register server side", user)
         var user = { name: user.name, username: user.username, dateOfBirth: user.dateOfBirth, email: user.email, password: user.password, emploiNow: null,picture:null, formation: null, listLastEmploy: null, description: null, listCompetence: null, listInterest: null  }
         SchemaManager.modelUser.findOne({mail : user.email}, function(err, response){
@@ -213,6 +218,7 @@ class SocketManager {
     }
 
     addInfosToProfil(userMail, newInfos, client) {
+        console.log('[SocketManager] addInfoToProfil() function called')
         switch (newInfos) {
             case newInfos.emploiNow:
                 var lastJob;
@@ -262,7 +268,7 @@ class SocketManager {
                         });
                     }
                 });
-                
+
                 break;
             case newInfos.formation:
                 SchemaManager.modelUser.updateOne({ email: userMail }, $set[{ emploiNow: newInfos.formation }], function (err, response) {
@@ -328,6 +334,7 @@ class SocketManager {
     }
 
     getVisits(email, client) {
+        console.log('[SocketManager] getVisits() function called')
         SchemaManager.modelVisits.findOne({ email: email }, function (err, response) {
             if (err) {
                 throw err;
@@ -349,6 +356,7 @@ class SocketManager {
     // utils
 
     addNotificationToThisUser(userTargeted, newNotification) {
+        console.log('[SocketManager] addNotificationToThisUser() function called')
         modelNotification.findOne({ userMail: userTargeted }, function (err, response) {
             if (err) {
                 throw err;
@@ -370,6 +378,7 @@ class SocketManager {
     }
 
     checkIfAlreadyKnown(userMail, userChecked) {
+        console.log('[SocketManager] checkIfAlreadyKnown() function called')
         SchemaManager.modelVisits.findOne({ email: userMail }, function (err, response) {
             if (err) {
                 throw err;
@@ -391,7 +400,7 @@ class SocketManager {
         });
     }
 
-   
+
 
 }
 
