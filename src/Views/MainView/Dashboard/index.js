@@ -19,47 +19,93 @@ class Dashboard extends Component {
       this.setState({ listUser : cards })
     ); 
   }
- 
+  destroyCard(e){
+    if(this.state.listUser.length < 2){
+      this.setNewList();
+    }
+    this.setState({listUser : this.state.listUser.slice(1)})
+    console.log(this.state.listUser);
+  }
+
+
+
+  setNewList(){
+    console.log("oknewList")
+    getAllCards((err, cards) => 
+      this.setState({ listUser : cards })
+    );
+    this.render()
+  }
+  
+
   render(){
     var that = this;
-    var documentListUser = this.state.listUser.map(function(element, i){
+    var listCard = this.state.listUser;
+    var documentListUser = listCard.map(function(element, i){
       console.log(element);
       if(i < 9){
         if(i%2){
           return(
-            <Card username={element.username} name={element.name} emploiNow={element.emploiNow} customColor={"customInterest0"} key={i} src="/src/images/user.png" />
+            <div key= {i} className={"wrapperCard "+ "customInterest0"}>
+                  <div className="cardHeader customHeader">
+                      <img className="cardImage" src={element.src}/>
+                      <img className="languageCard"/>
+                        <div className="cardNames">
+                          <a>{element.username}</a>
+                          <a>{element.name}</a>
+                          
+                        </div>
+                        <div className="cardEmail">
+                          <a>{element.email}</a>
+                        </div>
+                        <div className="cardEmploy">
+                          <a>{element.emploiNow}</a>
+                        </div>
+                  </div>
+                  <div className="cardContent">
+                    <button onClick={that.destroyCard.bind(that)}> Next
+                      </button>
+                  </div>
+            </div>
           );
         }
         else{
           return(
-            <Card username={element.username} name={element.name} emploiNow={element.emploiNow} customColor={"customInterest2"} key={i} src="/src/images/user.png" />
+            <div key= {i} className={"wrapperCard "+ "customInterest2"}>
+                  <div className="cardHeader customHeader">
+                      <img className="cardImage" src={element.src}/>
+                      <img className="languageCard"/>                        
+                        <div className="cardNames">
+                          <a>{element.username}</a>
+                          <a>{element.name}</a>
+                        </div>
+                        <div className="cardEmail">
+                          <a>{element.email}</a>
+                        </div>
+                        <div className="cardEmploy">
+                          <a>{element.emploiNow}</a>
+                        </div>
+                  </div>
+                  <div className="cardContent">
+                    <button onClick={that.destroyCard.bind(that)}> Next
+                      </button>
+                  </div>
+            </div>
           );
         }  
       }
     });
 
     const listJobStats = {startWin: 22, exchange: 30, meeting: 12};
-
-   
     
     return (
       
       <div className="gridViewWrapper">
         <a className="titleStartStats"> Vos stats StartJob</a>
-        {/* <div className="containerStatsInfo">
-        
-          <div className="startStats">{listJobStats.startWin}</div>
-          <img className="startStatsImage" src="/src/images/network.png"/>
-          <div className="startStats">{listJobStats.exchange}</div>
-          <img className="startStatsImage" src="/src/images/exchange-arrows.png"/>
-          <div className="startStats">{listJobStats.meeting}</div>
-          <img className="startStatsImage" src="/src/images/meeting.png"/>
-        </div> */}
-        
         <div className="containerCard">
           <div className="wrapperGridCard">
             <div className="containerWrapper"> 
-              <div className="cardGridHandler">
+              <div className="cardGridHandler" id="cardGridHandler">
                  {documentListUser}
               </div>
             </div>
