@@ -20,12 +20,20 @@ class FootBar extends Component {
             sleectedconvindex: index
         })
     }
+    closeConvoBox(e) {
+        e.preventDefault();
+        this.setState({
+            selectedConv: false,
+        })
+    }
     render() {
     const size = 200 + this.state.sleectedconvindex*50
     return (
     <div className="footBar"> 
         {this.state.selectedConv && 
             <ConvBox
+                closeConvoBox={this.closeConvoBox.bind(this)}
+                id={this.state.sleectedconvindex}
                 style={{
                     left: size
                 }}
