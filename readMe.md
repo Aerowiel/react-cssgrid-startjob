@@ -1,6 +1,6 @@
-# Project Title
+# StartJob React & Socket & MongoDB
+Courses Project
 
-StartJob React & Socket & MongoDB
 
 ## Getting Started
 
@@ -11,9 +11,12 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 Install MongoDB : https://docs.mongodb.com/manual/installation/
+
 Install NodeJs : https://nodejs.org/en/download/package-manager/
 
-Run MongoDB
+Run MongoDB: 
+            -windows: ./bin/mongo.exe
+            -linux: sudo mongod
 
 ### Installing
 
