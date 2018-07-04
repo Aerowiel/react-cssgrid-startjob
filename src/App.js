@@ -84,6 +84,8 @@ class App extends Component {
                     <PrivateRoute path="/visiteOnYourProfile" comp={VisiteOnYourProfile}/>
                     <PrivateRoute path="/standBy" comp={StandBy}/>
                     <PrivateRoute path="/createOffer" comp={CreateOffer}/>
+                    <PrivateRoute path="/Login" comp={Login}/>
+
                     <PrivateRoute exact path="/" comp={Dashboard}/>
                 </div>
                 <FootBar/>

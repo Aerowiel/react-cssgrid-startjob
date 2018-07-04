@@ -174,11 +174,11 @@ html{
   grid-template-rows: repeat(1, 1fr); 
 
 }
-.wrapperTopListButton button img{
-  width:75%;
-  height: 75%;
-  vertical-align: -30%;
-}
+// .wrapperTopListButton button img{
+//   width:100%;
+//   height: 100%;
+//   vertical-align: -30%;
+// }
 
 
 .wrapperTopBar{
@@ -190,13 +190,20 @@ html{
 }
 
 .wrapperTopListButton button{
-  width: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  margin-right: 10px;
 }
 
-.wrapperTopListButton button:hover{
-  background-color: #0099ff;
+.userProfil:hover{
+  border-color: #0099ff;
   color: white;
+}
+
+.disconnect:hover{
+  border-color:red;
+
 }
 
 .wrapperTopListButton button:focus{
@@ -733,4 +740,189 @@ form{
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: repeat(6, 1fr);
   height: 100%;
+}
+
+
+.offerEnterprise{
+  text-align: center;
+}
+
+.offerName{
+  text-align: left;
+  margin-top: 20%;
+  margin-left:5%;
+}
+
+.offerDate{
+  text-align: right;
+  margin-right:10px;
+
+}
+
+.offerContratDate{
+  font-size:0.7em;
+  margin-left: 20%;
+}
+
+.offerContent{
+  margin: 10px;
+  text-align: center;
+  font-style: italic;
+}
+
+.customHeader{
+  height: 30% !important;
+}
+
+.offerOwner{
+
+}
+
+.offerCompSearched{
+  font-size: 0.7em;
+}
+
+.offerCompSearched li{
+  margin-left: 30%;
+}
+
+.loginContainer{
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+ 
+}
+
+.loginContent{
+  grid-column: 5/9;
+  grid-row: 3 /11;
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  grid-template-rows: repeat(12, 1fr);
+  border-radius: 10%;
+  border: thin solid #0099ff;
+}
+.loginRegister{
+  grid-column: 3/11;
+  grid-row: 3 /11;
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  grid-template-rows: repeat(12, 1fr);
+}
+
+.loginTitle{
+  grid-column: 2/5;
+  grid-row: 2;
+}
+
+.userMail{
+  grid-column: 2/6;
+  grid-row: 2;
+}
+
+.userPassword{
+  grid-column: 2/6;
+  grid-row: 4;
+}
+
+.submitLogin{
+  grid-column: 3/5;
+  grid-row: 6;
+  width: 100%;
+  height: 100%;
+}
+
+.errorMail{
+  grid-column: 2/6;
+  grid-row:3;
+  display: none;
+}
+.errorPassword{
+  grid-column: 2/6;
+  grid-row:5;
+  display: none;
+}
+
+.wrapperButtonLogin{
+  grid-row: 2;
+  grid-column: 5/9;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  button{
+    font-size: 1em;
+    margin: 10px;
+    border: none;
+    outline: none;
+  }
+  
+}
+.selectedLogin{
+  border-bottom: thin solid #0099ff !important;
+  font-size: 1.2em !important;
+}
+
+.selectedModeLogin{
+  grid-column: 4 / 10;
+  grid-row: 3 /10;
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.selectedModeRegister{
+  grid-column: 4 / 10;
+  grid-row: 3 /18;
+  display: grid;
+  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.inputUserName{
+  grid-column: 2/6;
+  grid-row: 1;
+}
+.inputLastName{
+  grid-column: 2/6;
+  grid-row: 3;
+}
+.inputEmail{
+  grid-column: 2/6;
+  grid-row: 5;
+}
+
+.inputPassword{
+  grid-column: 2/6;
+  grid-row: 7;
+}
+
+.inputConfirmPassword{
+  grid-column: 2/6;
+  grid-row: 9;
+}
+.errorInputUserName{
+  grid-column: 2/6;
+  grid-row: 2;
+}
+.errorInputLastName{
+  grid-column: 2/6;
+  grid-row: 4;
+}
+.errorInputEmail{
+  grid-column: 2/6;
+  grid-row: 6;
+}
+.errorInputPassword{
+  grid-column: 2/6;
+  grid-row: 8;
+}
+.errorInputConfirmPassword{
+  grid-column: 2/6;
+  grid-row: 10;
+}
+.submitRegister{
+  grid-column: 2/6;
+  grid-row: 12;
 }

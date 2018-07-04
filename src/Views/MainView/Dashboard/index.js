@@ -56,7 +56,7 @@ class Dashboard extends Component {
       documentRenderer = listCard.map(function(element, i){
         return(
           <div key= {i} className="wrapperCard">
-                <div className="cardHeader customHeader">
+                <div className="cardHeader">
                     <button className="languageCard"><img src="/src/images/worldwide.png"/></button>
                     <img className="cardFormationIcon" src="/src/images/books.png"/>
                     <div className="cardFormation">
@@ -128,15 +128,28 @@ class Dashboard extends Component {
         return(
           <div key= {index} className="wrapperCard">
               <div className="cardHeader customHeader">
-                <div>{element.enterprise}</div>
-                <div>{element.nameOffer}</div>
-                <div>{element.date}</div>
-                <div>{element.owner}</div>
+                <div className="offerEnterprise">{element.enterprise}</div>
+                <div className="offerDate">{element.date}</div>
+                <div className="offerName">Type De Contrat : {element.nameOffer}</div>
+                <div className="offerContratDate"> 
+                  12-01-1990 - 13-01-2500 
+                </div>
               </div>
               <div className="cardContent">
-                <div>{element.description}</div>
-                <button>Contact</button>
-                <button>Next</button>
+                <div className="offerContent">{element.description}</div>
+                <div className="offerCompSearched"> Compétence recherchée
+                  {
+                    element.compSearched.map(function(element, index){
+                      return(
+                        <li key={index}>{element}</li>
+                      );
+                    })
+                  }
+                </div>
+                <div className="cardRowButton">
+                  <button className="buttonBottomCard">Contact</button>
+                  <button className="buttonBottomCard">Next</button>
+                </div>
               </div>
           </div>
         );
