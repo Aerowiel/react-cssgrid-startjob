@@ -31,6 +31,9 @@ class Dashboard extends Component {
     this.setState({listUser : this.state.listUser.slice(1)})
     console.log(this.state.listUser);
   }
+  destroyOffer(e){
+    this.setState({listOffer : this.state.listOffer.slice(1)});
+  }
 
 
 

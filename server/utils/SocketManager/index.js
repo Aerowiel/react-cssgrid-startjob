@@ -41,15 +41,29 @@ class SocketManager {
 
         clientSocket.on('getAllMessages', (user, userInTalk) => this.getAllMessages(user,userInTalk,clientSocket));
         
-        clientSocket.on('sendMessageByChat', (message,user,userInTalk) => this.sendMessageChat(message,user,userInTalk, clientSocket))
+        clientSocket.on('sendMessageByChat', (message,user,userInTalk) => this.sendMessageChat(message,user,userInTalk, clientSocket));
         //DECOMMENT THIS LINE FOR POPUALTE YOUR MONGODB
         // this.populateDB();
+
+        clientSocket.on('addOffer', (offer) => this.addOffer(offer, clientSocket));
       }
 
     answerCheckIfClientExists(clientsocketid, client){
       if(clientsocketid !== null){
         UserManager.updateUserSocketID(UserManager.getUserBySocketID(clientsocketid), client.id);
       }
+    }
+
+    addOffer(offer, client){
+        console.log("addOfffer", offer);
+        SchemaManager.modelOffers.create(offer, function(err, response){
+            if(err){ throw err }
+            else{
+                if(response){
+                    client.emit('responseAddOffer', response);
+                }
+            }
+        })
     }
 
     checkIfUserExists(client){
