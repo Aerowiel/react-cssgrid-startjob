@@ -58,6 +58,7 @@ class Dashboard extends Component {
           <div key= {i} className="wrapperCard">
                 <div className="cardHeader customHeader">
                     <button className="languageCard"><img src="/src/images/worldwide.png"/></button>
+                    <img className="cardFormationIcon" src="/src/images/books.png"/>
                     <div className="cardFormation">
                         <a>{element.formation}</a>
                      </div>
@@ -85,20 +86,9 @@ class Dashboard extends Component {
                       })
                     }
                   </div>
-                  <div className="listLastEmploy">
+                  <div className="listLastEmploy"> Emplois
                     {
                       element.listLastEmploy.map(function(item, index){
-                          return(
-                            <div key={index}>
-                              {item}
-                            </div>
-                          )
-                      })
-                    }
-                  </div>
-                  <div className="listInterest">
-                    {
-                      element.listInterest.map(function(item, index){
                           return(
                             <div key={index}>
                               {item}
@@ -110,8 +100,24 @@ class Dashboard extends Component {
                   <div className="cardDescription">
                     {element.description}
                   </div>
-                  <button>Message</button>
-                  <button onClick={that.destroyCard.bind(that)}>Next</button>
+                  <div className="listInterest"> Hobbies
+                    {
+                      element.listInterest.map(function(item, index){
+                          return(
+                            <div key={index}>
+                              {item}
+                            </div>
+                          )
+                      })
+                    }
+                  </div>
+                  
+                  <div className="cardRowButton">
+                    <button className="buttonBottomCard"><img src="/src/images/paper-plane.png"/></button>
+                    <button className="buttonBottomCard"><img src="/src/images/star.png"/></button>
+                    <button className="buttonBottomCard" onClick={that.destroyCard.bind(that)}><img src="/src/images/share.png"/></button>
+                  </div>
+                 
                 </div>
           </div>
         );

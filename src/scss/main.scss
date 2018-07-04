@@ -1,9 +1,14 @@
 body{
   background-color: white;
   height: 100%;
-  font-family: 'Raleway', sans-serif;
+  :focus{
+    border: none;
+  }
+  
 }
-
+ div{
+  font-family: 'Raleway', sans-serif !important;
+ }
 #root{
   height: 100%;
 }
@@ -26,6 +31,8 @@ html{
   width: 50px;
   height: 38px;
 }
+
+
 
 .wrapperSideBar{
   height: 77%;
@@ -127,6 +134,28 @@ html{
 .footListButton{
   grid-column: 4 / 13;
   grid-row : 2 /4;
+}
+
+.listLastEmploy{
+  font-size: 0.8em;
+  height: 10%;
+  margin: 10px;
+}
+.listLastEmploy div{
+  font-size: 1.4em;
+  margin-left: 10%;
+}
+
+.listInterest{
+  font-size: 0.8em;
+  height: 10%;
+  margin: 10px;
+
+}
+
+.listInterest div{
+  font-size: 1.4em;
+  margin-left: 10%;
 }
 
 .topListButton{
@@ -297,7 +326,6 @@ html{
   position: relative;
   border-radius: 10px;
   box-shadow: 7px 6px 7px 0 rgba(0, 0, 0, 0.19);
-
 }
 
 .wrapperCard:hover{
@@ -319,7 +347,7 @@ html{
 .cardImage{
   width: 30% !important;
   height: 50% !important;
-  margin-left: 35% !important;
+  margin-left: 6% !important;
   margin-top: 10px !important;
   border-radius: 20%;
 }
@@ -339,19 +367,19 @@ html{
 .listComp{
   display: flex;
   height: 20%;
-  margin: 20px;
+  margin: 10px;
   grid-column: 0 !important;
   grid-row: 0 !important;
 }
 .listComp div{
-  width: 100%;
-  height: 100%;
   margin: auto;
 
 
 }
 .cardEmail{
   text-align: center;
+  font-size: 0.75em;
+  color: grey
 }
 
 .cardContent{
@@ -371,9 +399,15 @@ html{
 }
 
 .cardFormation{
-  margin-right: 7%;
-  margin-top: 25%;
-  float: right;
+  margin-left: 1%;
+  margin-top: 4%;
+  float: left;
+}
+
+.cardFormationIcon{
+  margin-left: 4%;
+  margin-top: 4%;
+  float: left;
 }
 
 
@@ -398,6 +432,11 @@ html{
   width: 100% !important;
   color : lightgrey;
   
+}
+.cardDescription{
+  margin:10px;
+  text-align: center;
+  font-style: italic;
 }
 
 .startStats{
@@ -429,18 +468,30 @@ html{
   width: 100%;
 }
 
-.cardContent button{
-  width: 120px  !important;
-  height: 50px  !important;
-  border-radius: 5px;
-  color: white;
-  font-weight: 900;
-  border: none;
-  background: #0099ff;
-  margin: auto;
-  text-transform: uppercase;
-  font-size: 15px;
-  letter-spacing: 3px;
+// .cardContent button{
+//   width: 120px  !important;
+//   height: 50px  !important;
+//   border-radius: 5px;
+//   color: white;
+//   font-weight: 900;
+//   border: none;
+//   background: #0099ff;
+//   margin: auto;
+//   text-transform: uppercase;
+//   font-size: 15px;
+//   letter-spacing: 3px;
+
+// }
+
+.cardRowButton{
+  margin-top:10%;
+}
+
+.buttonBottomCard{
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+  margin-left:30px;
 
 }
 
@@ -506,66 +557,50 @@ html{
     z-index : 16;
   }
   :nth-child(2){
-    background-image: url("/src/images/backgroundOpac.png");
     grid-column: 4 / 8;
     grid-row : 1;
     z-index : 15;
   }
   :nth-child(3){
-    background-image: url("/src/images/backgroundOpac.png");
-    
     grid-column: 5 / 9;
     grid-row: 1;
     z-index : 14;
   }
   :nth-child(4){
-    background-image: url("/src/images/backgroundOpac.png");
-    
     grid-column: 6 / 10;
     grid-row: 1;
     z-index : 13;
   }
   :nth-child(5){
-    background-image: url("/src/images/backgroundOpac.png");
-    
     grid-column: 7 / 11;
     grid-row: 1;
     z-index : 12;
   }
   :nth-child(6){
-    background-image: url("/src/images/backgroundOpac.png");
-    
     grid-column: 8 / 12;
     grid-row: 1;
     z-index : 11;
   }
   :nth-child(7){
-    background-image: url("/src/images/backgroundOpac.png");
-    
     grid-column: 9 / 13;
     grid-row: 1;
     z-index : 10;
   }
   :nth-child(8){
-    background-image: url("/src/images/backgroundOpac.png");
-    
     grid-column: 10 / 14;
     grid-row: 1;
     z-index : 9;
   }
   :nth-child(9){
-    background-image: url("/src/images/backgroundOpac.png");
-    
     grid-column: 11 / 15;
     grid-row: 1;
     z-index : 8;
   }
   :nth-child(10){
-    background-image: url("/src/images/backgroundOpac.png");
     grid-column: 12 / 16;
     grid-row: 1;
     z-index : 7;
-}
+  }
   :nth-child(){
     grid-column: 13 / 15;
     grid-row: 1;
