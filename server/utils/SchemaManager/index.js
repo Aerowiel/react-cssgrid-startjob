@@ -4,7 +4,7 @@ class SchemaManager {
         var schemaUser = new mongoose.Schema({ username: 'string', name: 'string', email: 'string', password: 'string', emploiNow: 'string', picture: 'string', formation: 'string', listLastEmploy: 'array', description: 'string', listCompetence: 'array', listInterest: 'array' , friendList:'array'}, { collection: 'Users' });
         this.modelUser = mongoose.model('Users', schemaUser);
 
-        var schemaMessage = new mongoose.Schema({ userName: 'string', userInTalk: 'string', conversation: [{ name: 'string' }, { date: 'string' }, { statusView: 'boolean' }, { message: 'string' }] }, { collection: 'userMessage' });
+        var schemaMessage = new mongoose.Schema({ userName: 'string', conversations: ['array']}, { collection: 'userMessage' });
         this.modelMessage = mongoose.model('userMessage', schemaMessage);
 
         var schemaNotification = new mongoose.Schema({ userMail: 'string', listNotification: 'array'}, { collection: 'notificationSystem' });

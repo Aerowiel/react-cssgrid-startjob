@@ -32,13 +32,16 @@ class UserManager{
 }
 
   getUserByEmail(email){
+    console.log(this.users);
     return this.users.find(user => user.email === email );
   }
 
 // Update
   updateUserSocketID(user, newSocketID){
-    // user.socketid = newSocketID;
-    // this.updateUserSessionInformations(user);
+    if(user){
+      user.socketid = newSocketID;
+      this.updateUserSessionInformations(user);
+    } 
   }
 
   setUserSessionInformations(user){

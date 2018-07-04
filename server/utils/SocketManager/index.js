@@ -38,7 +38,10 @@ class SocketManager {
         clientSocket.on('onMessage', (obj) => ChatManager.onMessage(obj.message, clientSocket.id, UserManager.getUserByEmail(obj.receiver).socketid ) );
 
         clientSocket.on('getAllOffers', () => this.getAllOffers(clientSocket));
+
+        clientSocket.on('getAllMessages', (user, userInTalk) => this.getAllMessages(user,userInTalk,clientSocket));
         
+        clientSocket.on('sendMessageByChat', (message,user,userInTalk) => this.sendMessageChat(message,user,userInTalk, clientSocket))
         //DECOMMENT THIS LINE FOR POPUALTE YOUR MONGODB
         // this.populateDB();
       }
@@ -53,6 +56,70 @@ class SocketManager {
       console.log("[SocketManager] checkIfUserExists() function called");
       console.log('to : ' + client.id)
       io.sockets.to(client.id).emit('checkIfUserExists');
+    }
+    getAllMessages(user, userInTalk, client){
+        SchemaManager.modelMessage.findOne({ userName: user}, function (err, responseListConv) {
+            if (err) {
+                throw err;
+            }
+            else {
+                responseListConv.conversations.forEach(function(element, index){
+                    element.forEach(function(item, i){
+                        if(item.userInTalk == userInTalk){
+                            if (item.conversation.length > 0) {
+                                client.emit("responseGetAllMessages", item.conversation);
+                            }
+                        }
+                    });
+                   
+                    
+                });
+            }
+        });
+    }
+
+    sendMessageChat(message, user, userInTalk, client){
+        console.log("sennnd message", message, user, userInTalk);
+        SchemaManager.modelMessage.findOne({userName: user}, function (err, responseListConv) {
+            if(err){
+                throw err;
+            }
+            else{
+                console.log("RESPONNNnnNNNNNNNNNNSSSSSSS",responseListConv);
+               if(!responseListConv.conversations.length > 0){
+                   console.log("no conversation");
+                   var newConv = { userInTalk : userInTalk, conversation :[{name: user}, {date : Date.now()}, {message: message}]};
+                    SchemaManager.modelMessage.updateOne({userName: user},{$set:{conversations : newConv}}, function(err, response){
+                        if(err){
+                            throw err;
+                        }
+                        else{
+                            console.log(response);
+                        }
+                    })
+                }
+                else{
+                    console.log("conversation exists");
+                    responseListConv.conversations.forEach(function(element, index){
+                        if(element.userInTalk == userInTalk){
+                            console.log()
+                            var NewMessage= { userInTalk : userInTalk, conversation :[{name: user}, {date : Date.now()}, {message: message}]};
+                            element.conversation.push(NewMessage);
+                            SchemaManager.modelMessage.updateOne({ userName: user}, {$set:{conversations : responseListConv.conversations}}, function(err, response){
+                                if(err){
+                                    throw err;
+                                }
+                                else{
+                                    client.emit("responseSendMessageByChat", response);
+                                }
+                            }); 
+
+                        }
+                    });
+                }
+
+            }
+        });
     }
 
     populateDB(){
@@ -139,22 +206,6 @@ class SocketManager {
         });
     }
 
-    getMessages(user, client) {
-      console.log('[SocketManager] getMessages() function called')
-        SchemaManager.modelMessage.find({ username: user }, function (err, responseListConv) {
-            if (err) {
-                throw err;
-            }
-            else {
-                if (responseListConv != null) {
-                    client.emit("responseMessages", responseListConv);
-                }
-                else {
-                    client.emit("responseMessages", null);
-                }
-            }
-        });
-    }
 
     getNotification(userMail, client) {
       console.log('[SocketManager] getNotification() function called')
@@ -255,7 +306,7 @@ class SocketManager {
                                                 throw err;
                                             }
                                             console.log(userNotificationCreated);
-                                            var userMessage = {id: userCreated._id, userMail: userCreated.email, userInTalk: null, conversation: []};
+                                            var userMessage = {id: userCreated._id, userName: userCreated.email, userInTalk: null, conversation: []};
                                             SchemaManager.modelMessage.create(userMessage, function(err, userMessageCreated){
                                                 if(err){
                                                     throw err;
@@ -275,6 +326,8 @@ class SocketManager {
                 }
             }
         });
+
+        // this.populateDB();
     }
 
     addInfosToProfil(userMail, newInfos, client) {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { ChatFeed, Message } from 'react-chat-ui'
-
+ 
+import {getAllMessages, sendMessageByChat} from './../../socketClient/chat'
 
 class ConvBox extends Component{
     constructor(props) {
@@ -10,6 +11,27 @@ class ConvBox extends Component{
         }
     }
 
+    componentDidMount(){
+        getAllMessages(this.props.id,(err, messages)=>{
+            console.log(messages);
+            if(messages[0].name != this.props.id){
+                this.setState({
+                    messages : [
+                        ...this.state.messages,
+                        new Message({ id: 0, message: messages[2].message }), // Blue bubble
+                    ]
+                })
+            }
+            else{
+                this.setState({
+                    messages : [
+                        ...this.state.messages,
+                        new Message({ id: 1, message: messages[2].message }), // Grey bubble
+                    ]
+                })
+            }
+        })
+    }
     componentWillMount() {
         socketClient.on('receivedMessage', (obj) => {
           console.log(obj.senderEmail + "sent : " + obj.message);
@@ -19,6 +41,7 @@ class ConvBox extends Component{
           ]});
         });
 
+        
         // this.props.id
     }
 
@@ -65,9 +88,13 @@ class ConvBox extends Component{
                 new Message({ id: 0, message: e.target.elements[0].value }), // Blue bubble
             ]
         })
-        e.target.elements[0].value = ""
+        sendMessageByChat(e.target.elements[0].value,this.props.id,(err, response)=>{
+            console.log(response);
+        })
+
     }
 
+    
     render(){
         return(
             <div
