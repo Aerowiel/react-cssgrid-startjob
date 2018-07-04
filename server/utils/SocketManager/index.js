@@ -92,48 +92,48 @@ class SocketManager {
         });
     }
 
-    sendMessageChat(message, user, userInTalk, client){
-        console.log("sennnd message", message, user, userInTalk);
-        SchemaManager.modelMessage.findOne({userName: user}, function (err, responseListConv) {
-            if(err){
-                throw err;
-            }
-            else{
-                console.log("RESPONNNnnNNNNNNNNNNSSSSSSS",responseListConv);
-               if(!responseListConv.conversations.length > 0){
-                   console.log("no conversation");
-                   var newConv = { userInTalk : userInTalk, conversation :[{name: user}, {date : Date.now()}, {message: message}]};
-                    SchemaManager.modelMessage.updateOne({userName: user},{$set:{conversations : newConv}}, function(err, response){
-                        if(err){
-                            throw err;
-                        }
-                        else{
-                            console.log(response);
-                        }
-                    })
-                }
-                else{
-                    console.log("conversation exists");
-                    responseListConv.conversations.forEach(function(element, index){
-                        if(element.userInTalk == userInTalk){
-                            console.log()
-                            var NewMessage= { userInTalk : userInTalk, conversation :[{name: user}, {date : Date.now()}, {message: message}]};
-                            element.conversation.push(NewMessage);
-                            SchemaManager.modelMessage.updateOne({ userName: user}, {$set:{conversations : responseListConv.conversations}}, function(err, response){
-                                if(err){
-                                    throw err;
-                                }
-                                else{
-                                    client.emit("responseSendMessageByChat", response);
-                                }
-                            }); 
+    sendMessageChat(message, user, userInTalk, client){ //ChatManager
+        // console.log("sennnd message", message, user, userInTalk);
+        // SchemaManager.modelMessage.findOne({userName: user}, function (err, responseListConv) {
+        //     if(err){
+        //         throw err;
+        //     }
+        //     else{
+        //         console.log("RESPONNNnnNNNNNNNNNNSSSSSSS",responseListConv);
+        //        if(!responseListConv.conversations.length > 0){
+        //            console.log("no conversation");
+        //            var newConv = { userInTalk : userInTalk, conversation :[{name: user}, {date : Date.now()}, {message: message}]};
+        //             SchemaManager.modelMessage.updateOne({userName: user},{$set:{conversations : newConv}}, function(err, response){
+        //                 if(err){
+        //                     throw err;
+        //                 }
+        //                 else{
+        //                     console.log(response);
+        //                 }
+        //             })
+        //         }
+        //         else{
+        //             console.log("conversation exists");
+        //             responseListConv.conversations.forEach(function(element, index){
+        //                 if(element.userInTalk == userInTalk){
+        //                     console.log()
+        //                     var NewMessage= { userInTalk : userInTalk, conversation :[{name: user}, {date : Date.now()}, {message: message}]};
+        //                     element.conversation.push(NewMessage);
+        //                     SchemaManager.modelMessage.updateOne({ userName: user}, {$set:{conversations : responseListConv.conversations}}, function(err, response){
+        //                         if(err){
+        //                             throw err;
+        //                         }
+        //                         else{
+        //                             client.emit("responseSendMessageByChat", response);
+        //                         }
+        //                     }); 
 
-                        }
-                    });
-                }
+        //                 }
+        //             });
+        //         }
 
-            }
-        });
+        //     }
+        // });
     }
 
     populateDB(){
