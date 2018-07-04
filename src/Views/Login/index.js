@@ -28,6 +28,18 @@ class Login extends Component {
             dateOfBirth:''
         };
     }
+    componentDidMount(){
+        if(this.state.selectedMode){
+            document.querySelector('.selectedModeLogin').style.display="grid";
+            document.querySelector('.selectedModeRegister').style.display="none";
+
+       }
+       else{
+            document.querySelector('.selectedModeLogin').style.display="none";
+            document.querySelector('.selectedModeRegister').style.display="grid";
+
+       }
+    }
     submitConnect(){
         console.log("")
       // this.props.history.push("/")
@@ -123,10 +135,15 @@ class Login extends Component {
         var userForRegistering ={ name: this.state.userLastName, username: this.state.userName, dateOfBirth: this.state.dateOfBirth, email: this.state.userMail, password: this.state.userPassword };
         register(userForRegistering,(err, responseRegister)=>{
             if(responseRegister != null){
-                userLogStatus.isLog();
+                var User = {email : responseRegister.email, password: responseRegister.password}
+                tryLogin(User,(err, returnUser) =>
+                    this.setStorageUser(returnUser)
+                );
             }
         })
     }
+
+    
 
   render() {
       
@@ -156,6 +173,7 @@ class Login extends Component {
                         <a className="errorMessage errorInputPassword">Erreur</a>
                     <input className="inputLogin inputConfirmPassword confirmPassword" ref={this.userConfirmPassword} placeholder="Vérification Mot de Passe" onChange={this.setUserPasswordRegister.bind(this)}/>
                         <a className="errorMessage errorInputConfirmPassword">Erreur</a>
+                    <input className="inputAgeRegister" type="date" placeholder="Votre Age" ref={this.userDateBirth} onChange={this.setUserDateBirthRegister.bind(this)}/>
                     <input type="submit" className="submitRegister" onClick={this.register.bind(this)} value="S'incriscre"/>
                 </div>
             </div>

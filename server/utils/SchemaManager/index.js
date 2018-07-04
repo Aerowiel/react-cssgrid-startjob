@@ -1,7 +1,7 @@
 class SchemaManager {
 
     constructor() {
-        var schemaUser = new mongoose.Schema({ username: 'string', name: 'string', email: 'string', password: 'string', emploiNow: 'string', picture: 'string', formation: 'string', listLastEmploy: 'array', description: 'string', listCompetence: 'array', listInterest: 'array' }, { collection: 'Users' });
+        var schemaUser = new mongoose.Schema({ username: 'string', name: 'string', email: 'string', password: 'string', emploiNow: 'string', picture: 'string', formation: 'string', listLastEmploy: 'array', description: 'string', listCompetence: 'array', listInterest: 'array' , friendList:'array'}, { collection: 'Users' });
         this.modelUser = mongoose.model('Users', schemaUser);
 
         var schemaMessage = new mongoose.Schema({ userName: 'string', userInTalk: 'string', conversation: [{ name: 'string' }, { date: 'string' }, { statusView: 'boolean' }, { message: 'string' }] }, { collection: 'userMessage' });

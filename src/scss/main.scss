@@ -701,6 +701,7 @@ form{
 .errorMessage{
   font-size:0.7em;
   color:red;
+  padding-left:5px;
 }
 
 .enterpriseOffer{
@@ -922,7 +923,15 @@ form{
   grid-column: 2/6;
   grid-row: 10;
 }
+.inputAgeRegister{
+  grid-column: 2/6;
+  grid-row: 11;
+}
 .submitRegister{
   grid-column: 2/6;
   grid-row: 12;
+}
+
+input{
+  padding-left:10px;
 }

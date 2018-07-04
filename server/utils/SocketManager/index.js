@@ -228,7 +228,7 @@ class SocketManager {
     register(user, client) {
         console.log('[SocketManager] register() function called')
         console.log("register server side", user)
-        var user = { name: user.name, username: user.username, dateOfBirth: user.dateOfBirth, email: user.email, password: user.password, emploiNow: null,picture:null, formation: null, listLastEmploy: null, description: null, listCompetence: null, listInterest: null  }
+        var user = { name: user.name, username: user.username, dateOfBirth: user.dateOfBirth, email: user.email, password: user.password, emploiNow: "test",picture:"/src/images/user.png", formation: "formation", listLastEmploy: ["emploi1", "emploi2"], description: "description", listCompetence: ["C","C++"], listInterest: ["Pere Noel", "Drake"], friendList:["superUser@startJob.com"]  }
         SchemaManager.modelUser.findOne({mail : user.email}, function(err, response){
             if(err){
                 throw err;
