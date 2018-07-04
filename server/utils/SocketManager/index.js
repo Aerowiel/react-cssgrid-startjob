@@ -306,7 +306,7 @@ class SocketManager {
                                                 throw err;
                                             }
                                             console.log(userNotificationCreated);
-                                            var userMessage = {id: userCreated._id, userName: userCreated.email, userInTalk: null, conversation: []};
+                                            var userMessage = {id: userCreated._id, userName: userCreated.email,conversations: []};
                                             SchemaManager.modelMessage.create(userMessage, function(err, userMessageCreated){
                                                 if(err){
                                                     throw err;
